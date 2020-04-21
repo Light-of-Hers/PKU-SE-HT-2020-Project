@@ -7,7 +7,7 @@ jsbn@^1.1.0:
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-1.1.0.tgz#b01307cb29b618a1ed26ec79e911f803c4da0040"
   integrity sha1-sBMHyym2GKHtJux56RH4A8TaAEA=
 
-miniprogram-taas-sdk@./taas-sdk/:
+miniprogram-taas-sdk@../taas-sdk/:
   version "1.4.2"
   dependencies:
     sm-crypto "^0.1.0"
