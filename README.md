@@ -1,12 +1,12 @@
-# 云开发 quickstart
+# 我的创作家园 （2020 PKU SE）
 
-这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：
+## 准备
 
-- 数据库：一个既可在小程序前端操作，也能在云函数中读写的 JSON 文档型数据库
-- 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
-- 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
+首先Clone该项目并进入项目文件夹，然后安装依赖
 
-## 参考文档
+```
+cd miniprogram
+yarn install --flat
+```
 
-- [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
-
+之后在微信开发者工具中导入项目并构建npm
