@@ -9,5 +9,6 @@ function getKeys() {
 }
 
 module.exports = {
-    getKeys
+    getKeys,
+    generateKeys
 }
