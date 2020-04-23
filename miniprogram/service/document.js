@@ -1,3 +1,5 @@
+const sdk = require('miniprogram-taas-sdk')
+
 class DocumentInfo {
     constructor(id, name, versions) {
         this.id = id

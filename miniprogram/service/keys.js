@@ -3,6 +3,11 @@ function generateKeys() {
     return ["publickey", "privatekey"]
 }
 
+function getKeys() {
+    console.log("getKeys: Not implemented yet")
+    return null
+}
+
 module.exports = {
-    generateKeys
+    getKeys
 }
