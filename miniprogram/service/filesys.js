@@ -15,10 +15,12 @@ class BaseFile {
 
 class DocFile extends BaseFile {
     id = 0
+    versions = []
 
-    constructor(name, id = 0, parent = null) {
+    constructor(name, id, versions = [], parent = null) {
         super(name, parent);
         this.id = id;
+        this.versions = versions;
     }
     getPath() {
         let res = this.name;
@@ -93,7 +95,7 @@ function buildFS(infos) {
             cur_dir = dir;
         }
         if (cur_dir.getChild(fname) === undefined)
-            cur_dir.addChild(path.endsWith("/") ? new DirFile(fname, cur_dir) : new DocFile(fname, info.id));
+            cur_dir.addChild(path.endsWith("/") ? new DirFile(fname, cur_dir) : new DocFile(fname, info.id, info.versions));
     }
     return fs;
 }
@@ -108,7 +110,7 @@ function simpleTest() {
     console.log(buildFS(infos).toString());
 }
 
-simpleTest();
+// simpleTest();
 
 module.exports = {
     DocFile,
