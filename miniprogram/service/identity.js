@@ -7,15 +7,43 @@ module.exports = {
     registered: false,
 
     init: function() {
-        //TODO: 从缓存中恢复credential, publickey, privatekey
-        console.log('Identity Manager Init')
+        const data = wx.getStorageSync("identity")
+        if(!data)
+            return
+        try {
+            let dataObj = JSON.parse(data)
+            this.credential = dataObj.credential
+            this.publicKey = dataObj.publicKey
+            this.privateKey = dataObj.privateKey
+            this.registered = true
+        } catch (e) {
+            console.error(e)
+        }            
     },
 
     save: function() {
-        //TODO: 保存到缓存
+        const data = {
+            credential: this.credential,
+            publicKey: this.publicKey,
+            privateKey: this.privateKey
+        }
+        wx.setStorageSync("identity", data)
     },
 
     register: function(invitationCode) {
-        //TODO: 生成credential并保存
+        return new Promise((resolve, reject) => {
+            sdk.getCredential(invitationCode, null, (err, data) => {
+                if(err)
+                    reject(err)
+                else {
+                    this.credential = data.credential
+                    this.publicKey = data.publicKey
+                    this.privateKey = data.privateKey
+                    this.save()
+                    this.registered = true
+                    resolve()
+                }
+            })
+        })
     }
 }
