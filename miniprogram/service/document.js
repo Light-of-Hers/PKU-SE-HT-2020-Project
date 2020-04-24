@@ -1,65 +1,52 @@
+const identity = require('identity.js')
 const sdk = require('miniprogram-taas-sdk')
 
-class DocumentInfo {
-    constructor(id, name, versions) {
+class DocumentVersion {
+    constructor(timestamp, content) {
+        this.timestamp = timestamp
+        this.content = content
+    }
+}
+
+class Document {
+    constructor(id, name, path, hashId){
         this.id = id
-        this.name = name
-        this.versions = versions
+        this.name = name,
+        this.path = path
+        this.latestHashId = hashId
+        this.versions = null
     }
 
-    isMain() {
-        return this.id == 0;
+    download() {
+        //TODO: 从区块链上下载内容，恢复versions
     }
-}
 
-function getDocumentList(private_key) {
-    console.log("getDocumentList: Not Implement Yet")
-    const test_list = [new DocumentInfo(0, "Test", [1,2,3])]
-    return new Promise((resolve, reject) => {
-        if(private_key != 'fail') {
-            resolve(test_list)
-        } else {
-            reject('Fail!')
-        }
-    })
-}
+    update(content) {
+        //TODO: 为该文档新增一个版本并上传至区块链
+    }
 
-function getDocument(private_key, id, time=null) {
-    console.log("getDocument: Not Implement Yet")
-    return new Promise((resolve, reject) => {
-        if(private_key != 'fail') {
-            resolve(`此处省略1000字(id=${id})`)
-        } else {
-            reject('Fail!')
-        }
-    })
-}
-
-function createDocument(private_key, name) {
-    console.log("createDocument: Not Implement Yet")
-    return new Promise((resolve, reject) => {
-        if(private_key != 'fail') {
-            resolve(0)
-        } else {
-            reject('Fail!')
-        }
-    })
-}
-
-function updateDocument(private_key, id, content) {
-    console.log("updateDocument: Not Implement Yet")
-    return new Promise((resolve, reject) => { 
-        if(private_key != 'fail') {
-            resolve(new Date().getTime())
-        } else {
-            reject('Fail!')
-        }
-    })
+    isReady() {
+        return this.versions != null
+    }
 }
 
 module.exports = {
-    getDocumentList,
-    getDocument,
-    createDocument,
-    updateDocument
+    documentList: null,
+
+    init: function() {
+        //TODO: 从本地缓存中恢复文档列表
+        console.log('Document Manager Init')
+    },
+
+    save: function() {
+        //TODO: 将文档列表保存至缓存
+    },
+
+    createDocument: function(name, path) {
+        //TODO: 新建一个文档，把信息保存在本地
+    },
+
+    getDocumentById: function(id) {
+
+    }    
 }

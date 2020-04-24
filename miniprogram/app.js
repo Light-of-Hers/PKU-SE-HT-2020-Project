@@ -15,6 +15,11 @@ App({
     //   })
     // }
 
+    this.service = require('service/index.js')
+    this.service.init()
+
+    console.log(this.service.document.documentList[0])
+
     this.globalData = {}
   }
 })
