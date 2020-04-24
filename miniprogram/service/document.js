@@ -11,9 +11,10 @@ class DocumentVersion {
 class Document {
     constructor(id, name, path, hashId){
         this.id = id
-        this.name = name,
+        this.name = name
         this.path = path
         this.latestHashId = hashId
+        this.ready = false
         this.versions = null
     }
 
@@ -24,10 +25,6 @@ class Document {
     update(content) {
         //TODO: 为该文档新增一个版本并上传至区块链
     }
-
-    isReady() {
-        return this.versions != null
-    }
 }
 
 module.exports = {
@@ -35,6 +32,7 @@ module.exports = {
 
     init: function() {
         //TODO: 从本地缓存中恢复文档列表
+        this.documentList = [new Document(123,"main","/main","main"), new Document(234,"234","/qwe/w","qwe")] //For testing
         console.log('Document Manager Init')
     },
 
@@ -46,7 +44,11 @@ module.exports = {
         //TODO: 新建一个文档，把信息保存在本地
     },
 
-    getDocumentById: function(id) {
+    userInit: function() {
+        //TODO: 初始化用户的文档列表
+    },
 
+    findDocumentById: function(id) {
+        
     }    
 }

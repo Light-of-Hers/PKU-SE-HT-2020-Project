@@ -15,8 +15,11 @@ App({
     //   })
     // }
 
-    this.service = require('service/index.js')
-    this.service.init()
+    const document = require('service/document')
+    const identity = require('service/identity')
+
+    document.init()
+    identity.init()
 
     this.globalData = {}
     const fsys = require("./service/filesys");
@@ -24,6 +27,6 @@ App({
     this.globalData = {
       root: undefined,
     };
-    doc.getDocumentList("wow").then(infos => this.globalData.root = fsys.buildFS(infos));
+    this.globalData.root = fsys.buildFS(document.documentList)
   }
 })

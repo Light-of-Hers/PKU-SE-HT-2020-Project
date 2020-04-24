@@ -4,6 +4,7 @@ module.exports = {
     credential: null,
     publicKey: null,
     privateKey: null,
+    registered: false,
 
     init: function() {
         //TODO: 从缓存中恢复credential, publickey, privatekey
@@ -14,11 +15,7 @@ module.exports = {
         //TODO: 保存到缓存
     },
 
-    generate: function(invitationCode) {
+    register: function(invitationCode) {
         //TODO: 生成credential并保存
-    },
-
-    isRegistered: function() {
-        return this.credential != null
     }
 }

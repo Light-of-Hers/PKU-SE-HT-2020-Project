@@ -1,5 +1,3 @@
-'use strict';
-
 class BaseFile {
     name = ""
     parent = null
@@ -81,7 +79,7 @@ class DirFile extends BaseFile {
 function buildFS(infos) {
     const fs = new DirFile("/");
     for (const info of infos) {
-        const path = info.name + "";
+        const path = info.path + "";
         const names = path.split("/").filter(s => s != "");
         const fname = names[names.length - 1];
         names.pop();
