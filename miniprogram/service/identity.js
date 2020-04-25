@@ -32,9 +32,7 @@ module.exports = {
             sdk.getCredential(invitationCode, null, (err, data) => {
                 if(err) {
                     reject(err)
-                    console.log('123')
                 } else {
-                    console.log('456')
                     this.credential = data.credential
                     this.publicKey = data.publicKey
                     this.privateKey = data.privateKey
