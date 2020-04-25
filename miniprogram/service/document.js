@@ -106,10 +106,10 @@ module.exports = {
         您的公钥为${identity.publicKey}`
 
         this.documentList = []
-        this.createDocument('main', '/main', helpInfo)
+        return this.createDocument('main', '/main', helpInfo)
     },
 
     findDocumentById: function(id) {
-        
+        throw('Not implement')
     }    
 }

@@ -1,4 +1,5 @@
 const sdk = require('miniprogram-taas-sdk')
+const document = require('document')
 
 module.exports = {
     credential: null,
@@ -41,9 +42,20 @@ module.exports = {
                     this.privateKey = data.privateKey
                     this.save()
                     this.registered = true
-                    resolve()
+                    document.userInit()
+                    .then(() => {resolve(this.credential)})
+                    .catch((e) => {reject(e)})
                 }
             })
         })
+    },
+    
+    login: function(credential) {
+        this.credential = credential
+        this.save()
+        this.registered = true
+        document.userInit()
+        .then(() => {resolve()})
+        .catch((e) => {reject(e)})
     }
 }
