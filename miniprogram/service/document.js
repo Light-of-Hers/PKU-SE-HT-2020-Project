@@ -60,7 +60,7 @@ class Document {
         return new Promise((resolve, reject) => {
             sdk.promises.storeEvidence(data, null, identity.credential)
             .then(({hashId, sig}) => {
-                sdk.promises.queryEvidence(hashId, null, identity.credential)
+                return sdk.promises.queryEvidence(hashId, null, identity.credential)
             })
             .then(({timestamp}) => {
                 this.latestHashId = hashId
@@ -79,6 +79,7 @@ module.exports = {
     documentList: null,
 
     init: function() {
+        this.documentList = []
         //TODO: 从本地缓存中恢复文档列表
         console.log('Document Manager Init')
     },
