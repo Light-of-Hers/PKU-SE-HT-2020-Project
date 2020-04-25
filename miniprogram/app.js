@@ -22,11 +22,8 @@ App({
     identity.init()
 
     this.globalData = {}
+
     const fsys = require("./service/filesys");
-    const doc = require("./service/document");
-    this.globalData = {
-      root: undefined,
-    };
-    this.globalData.root = fsys.buildFS(document.documentList)
+    this.globalData.root = fsys.buildFS(document.documentList);
   }
 })
