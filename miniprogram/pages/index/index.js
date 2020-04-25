@@ -11,7 +11,6 @@ Page({
   },
 
   onLoad: function() {
-    console.log(identity)
     if(identity.registered) {
       console.log(identity.credential)
       //TODO: 跳转至文档页
