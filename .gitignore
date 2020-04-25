@@ -1,5 +1,6 @@
 .vscode/
 .idea/
+*yarn.lock
 
 miniprogram_npm/
 !node_modules/miniprogram-taas-sdk

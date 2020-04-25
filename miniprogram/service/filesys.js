@@ -37,7 +37,7 @@ class DocFile extends BaseFile {
         return await this.doc.update(content);
     }
     toString() {
-        return this.id.toString();
+        return this.getId().toString();
     }
 }
 
