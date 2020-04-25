@@ -20,6 +20,7 @@ App({
 
     document.init()
     identity.init()
+    document.userInit()
 
     this.globalData = {}
 
