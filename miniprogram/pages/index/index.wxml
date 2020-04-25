@@ -55,5 +55,12 @@
     </navigator>
   </view>
 
+  <!-- 我的创作家园（测试用） -->
+  <view class="uploader">
+    <navigator url="../homeForCreator/browsePage/browsePage" open-type="navigate" class="uploader-text">
+      <text>我的创作家园（测试用）</text>
+    </navigator>
+  </view>
+
 
 </view>
