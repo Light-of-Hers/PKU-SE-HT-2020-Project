@@ -17,8 +17,8 @@ Page({
     onShow: function () {
         const self = this;
         if (self.data.needRerender) {
-            self.render();
             self.data.needRerender = false;
+            self.render();
         }
     },
     render: function () {
@@ -41,21 +41,21 @@ Page({
     },
     newDoc: function () {
         const self = this;
+        self.data.needRerender = true;
+        self.data.chan.emit("newFileCreated");
         app.globalData.tmp_arg = self.data.cwd;
         wx.navigateTo({
             url: '../newDocPage/newDocPage',
         });
-        self.data.needRerender = true;
-        self.data.chan.emit("newFileCreated");
     },
     newFolder: function () {
         const self = this;
+        self.data.needRerender = true;
+        self.data.chan.emit("newFileCreated");
         app.globalData.tmp_arg = self.data.cwd;
         wx.navigateTo({
             url: '../newFolderPage/newFolderPage',
         });
-        self.data.needRerender = true;
-        self.data.chan.emit("newFileCreated");
     },
     modifyFile: function (event) {
         const self = this;

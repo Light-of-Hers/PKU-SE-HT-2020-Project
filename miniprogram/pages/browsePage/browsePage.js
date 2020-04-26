@@ -18,8 +18,8 @@ Page({
     onShow: function () {
         const self = this;
         if (self.data.needRerender) {
-            self.render();
             self.data.needRerender = false;
+            self.render();
         }
     },
     changeDir: function (dir) {
