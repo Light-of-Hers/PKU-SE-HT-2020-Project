@@ -10,9 +10,9 @@ Page({
     onLoad: function () {
         const self = this; // 静态绑定this，仅个人习惯
         const dir = app.globalData.root;
-        dir.addChild(new fs.DirFile("fuck"));
-        dir.addChild(new fs.DirFile("goushi"));
-        dir.addChild(new fs.DirFile("NM$L"));
+        dir.addChild(new fs.DirFile("dir1"));
+        dir.addChild(new fs.DirFile("dir2"));
+        dir.addChild(new fs.DirFile("dir3"));
         self.changeDir(dir);
     },
     onShow: function () {
