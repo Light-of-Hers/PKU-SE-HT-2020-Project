@@ -1,0 +1,15 @@
+<view class="container">
+    <view class="uploader" bindtap="newDoc">
+        <text class="uploader-text">新建文件</text>
+    </view>
+
+    <view class="uploader" bindtap="newFolder">
+        <text class="uploader-text">新建文件夹</text>
+    </view>
+
+    <view wx:for="{{files}}" wx:key="name">
+        <view class="uploader" data-file-index="{{index}}" bindtap="modifyFile">
+            <text class="uploader-text">{{item.name}}</text>
+        </view>
+    </view>
+</view>
