@@ -21,7 +21,7 @@ Page({
 
   newDoc: function(){
     const self = this;
-    document.createDocument(self.data.doc.name, self.data.doc.getPath(), "")
+    document.createDocument(self.data.doc.name, self.data.doc.getPath(), null)
     .then((newDocument, timestamp)=>{
       wx.showToast({title: "新建文件成功！"+ timestamp});
       self.data.doc.doc = newDocument;
