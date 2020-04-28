@@ -112,9 +112,14 @@ const document = {
         return new Promise((resolve, reject) => {
             const newDocument = new Document(this.documentList.length, name, path, null)
             this.documentList.push(newDocument)
+            if(content == null) {
+                console.log("Create Document With Null Content")
+                this.save()
+                resolve(newDocument, null)
+                return
+            }
             newDocument.update(content)
             .then((timestamp) => {
-                this.save()
                 resolve(newDocument, timestamp)
             })
             .catch((e) => {

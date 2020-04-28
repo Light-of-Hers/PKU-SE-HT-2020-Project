@@ -22,18 +22,19 @@ Page({
   },
 
   updateFile: function() {
-    try {
-      this.data.doc.update(this.data.input).then(function(res) {
-        wx.showToast({
-          title: '上传成功',
-          icon: 'success',
-          duration: 2000
-        })
-        setTimeout(function() {
-          wx.navigateBack({})
-        }, 2000)
-      });
-    } catch (e) {
+    this.data.doc.update(this.data.input)
+    .then(function(res) {
+      wx.showToast({
+        title: '上传成功',
+        icon: 'success',
+        duration: 2000
+      })
+      setTimeout(function() {
+        wx.navigateBack({})
+      }, 2000)
+    })
+    .catch((e) => {
+      console.error(e)
       wx.showModal({
         title: "提示",
         content: "上传失败",
@@ -43,6 +44,6 @@ Page({
           }
         }
       })
-    }
+    })
   }
 })
