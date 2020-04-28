@@ -9,27 +9,30 @@ Page({
     cwd: null,
     doc: null
   },
-  onload:function(){
-    this.setData({
+  onLoad:function(){
+    const self = this;
+    self.setData({
       cwd: app.globalData.tmp_arg
     })
   },
 
   bindDirNameInput: function(e){
-    this.data.doc = new Dirfile(e.detail.value, this.data.cwd);
+    const self = this;
+    self.data.doc = new filesys.DirFile(e.detail.value, self.data.cwd);
   },
 
   newDir: function(){
-    document.createDocument(this.data.doc.name, this.data.doc.getPath(), null)
-    .then((newDocument, timestamp)=>{
+    const self = this;
+    //document.createDocument(self.data.doc.name, self.data.doc.getPath(), null)
+    //.then((newDocument, timestamp)=>{
       wx.showToast({title: "新建文件成功！"+ timestamp});
-      app.globalData.tmp_arg = this.data.doc;
+      self.data.cwd.addChild(self.data.doc);
       wx.navigateBack({//返回
         delta: 1
       });
-    })
+    /*})
     .catch((e) =>{
       wx.showToast({title: "新建文件失败!"})
-    })
+    })*/
   }
 })
