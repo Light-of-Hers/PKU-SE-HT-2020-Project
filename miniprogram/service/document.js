@@ -67,7 +67,7 @@ class Document {
             })
             .then(({timestamp}) => {
                 this.latestHashId = hashid
-                this.ready = false
+                this.versions.splice(0, 0, new DocumentVersion(timestamp, content, hashid))
                 document.save()
                 resolve(timestamp)
             })
@@ -108,6 +108,7 @@ const document = {
             this.documentList.push(newDocument)
             newDocument.update(content)
             .then((timestamp) => {
+                this.save()
                 resolve(newDocument, timestamp)
             })
             .catch((e) => {
