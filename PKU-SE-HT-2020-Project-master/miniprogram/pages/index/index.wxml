@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+    <view>
+        <text>通过邀请码注册</text>
+        <input bindinput="bindInvitationCodeInput" 
+            bindconfirm="register"
+            confirm-type="done" 
+            placeholder="邀请码" />
+        <button bindtap="register">注册</button>
+    </view>
+
+    <view>
+        <text>导入Credential</text>
+        <input bindinput="bindCredentialInput"
+            bindconfirm="login"
+            confirm-type="done" 
+            placeholder="Credential" />
+        <button bindtap="login">导入</button>
+    </view>
+</view>
