@@ -41,7 +41,7 @@ class Document {
                             reject(err)
                             return
                         }
-                        const {content, lastHashId} = JSON.parse(data.data)
+                        const {content, lastHashId} = JSON.parse(data.text)
                         newVersions.push(new DocumentVersion(timestamp, content, hashId))
                         iter(lastHashId)
                     })
