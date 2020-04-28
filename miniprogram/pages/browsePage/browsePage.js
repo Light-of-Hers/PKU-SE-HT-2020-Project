@@ -35,7 +35,8 @@ Page({
     render: function () {
         const self = this;
         console.log("rendering page...");
-        self.data.files = Array.from(self.data.cwd.children.entries()).map(item => ({ name: item[0], file: item[1] }));
+        self.data.files = Array.from(self.data.cwd.children.entries()).filter(item => item[1]).
+            map(item => ({ name: item[1] instanceof fs.DirFile ? `${item[0]}/` : item[0], file: item[1] }));
         self.setData({
             files: self.data.files,
         });

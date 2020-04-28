@@ -13,7 +13,7 @@
   </block>
   <block wx:else>
     <view class = "no-version">
-      <image src = "no-version.png" style = "height: 200rpx; width: 200rpx;}" mode = "aspectFit"/>
+      <image src = "no-version.png" style = "height: 200rpx; width: 200rpx;" mode = "aspectFit"/>
     </view>
     <view class = "no-version">
       <text> 还没有开始写哦~ </text>

@@ -24,7 +24,8 @@ Page({
     render: function () {
         const self = this;
         console.log("rendering page...");
-        self.data.files = Array.from(self.data.cwd.children.entries()).map(item => ({ name: item[0], file: item[1] }));
+        self.data.files = Array.from(self.data.cwd.children.entries()).filter(item => item[1]).
+            map(item => ({ name: item[1] instanceof fs.DirFile ? `${item[0]}/` : item[0], file: item[1] }));
         self.setData({
             files: self.data.files,
         });
@@ -61,10 +62,10 @@ Page({
         const self = this;
         const idx = event.currentTarget.dataset.fileIndex;
         const file = self.data.files[idx].file;
-        if (file instanceof DirFile) {
+        if (file instanceof fs.DirFile) {
             console.log(`click DirFile: ${file.name}`);
             self.changeDir(file);
-        } else if (file instanceof DocFile) {
+        } else if (file instanceof fs.DocFile) {
             console.log(`click DocFile: ${file.name}`);
             app.globalData.tmp_arg = file;
             wx.navigateTo({
