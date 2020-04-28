@@ -48,6 +48,5 @@ module.exports = {
         this.credential = credential
         this.save()
         this.registered = true
-        resolve()
     }
 }

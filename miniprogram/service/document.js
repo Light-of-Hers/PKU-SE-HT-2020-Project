@@ -59,13 +59,14 @@ class Document {
         })
         return new Promise((resolve, reject) => {
             sdk.promises.storeEvidence(data, null, identity.credential)
-            .then(({hashId, sig}) => {
+            .then(({hashId}) => {
+                console.log(hashId)
                 return sdk.promises.queryEvidence(hashId, null, identity.credential)
             })
             .then(({timestamp}) => {
                 this.latestHashId = hashId
                 this.ready = false
-                this.save()
+                document.save()
                 resolve(timestamp)
             })
             .catch((e) => {
@@ -107,6 +108,7 @@ module.exports = {
         您的公钥为${identity.publicKey}`
 
         this.documentList = []
+        this.latestHashId = null
         return this.createDocument('main', '/main', helpInfo)
     },
 

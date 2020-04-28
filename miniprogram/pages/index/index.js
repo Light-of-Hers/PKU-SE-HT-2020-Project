@@ -42,11 +42,10 @@ Page({
 
   login: function() {
     identity.login(this.data.credential)
+    document.userInit()
     .then(() => {
-      return document.userInit()
-    })
-    .then(() => {
-      wx.showToast({title: "导入成功！"})
+      wx.showToast({title: "导入成功！", time: 2000})
+      console.log(document.documentList)
     })
     .catch((e) => {
       wx.showToast({title: "导入失败：" + e.message, icon: "none"})
