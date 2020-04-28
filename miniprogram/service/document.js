@@ -130,7 +130,7 @@ const document = {
 
     userInit: function() {
         const helpInfo =  `欢迎使用“我的创作家园”
-        您的公钥为${identity.credential.publickey}`
+        您的公钥为${identity.credential.publicKey}`
 
         this.documentList = []
         this.latestHashId = null
