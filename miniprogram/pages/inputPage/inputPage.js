@@ -23,8 +23,7 @@ Page({
 
   updateFile: function() {
     try {
-      this.data.doc.update(this.input).then(function(res) {
-        console.log(res);
+      this.data.doc.update(this.data.input).then(function(res) {
         wx.showToast({
           title: '上传成功',
           icon: 'success',
@@ -34,7 +33,7 @@ Page({
           wx.navigateBack({})
         }, 2000)
       });
-    } finally {
+    } catch (e) {
       wx.showModal({
         title: "提示",
         content: "上传失败",

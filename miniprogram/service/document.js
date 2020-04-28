@@ -41,7 +41,9 @@ class Document {
                             reject(err)
                             return
                         }
+                        console.log(data.text)
                         const {content, lastHashId} = JSON.parse(data.text)
+                        console.log(`Downloaded: (${hashId}) ${content}`)
                         newVersions.push(new DocumentVersion(timestamp, content, hashId))
                         iter(lastHashId)
                     })
@@ -53,6 +55,10 @@ class Document {
     }
 
     update(content) {
+        if(!this.ready)
+            return this.download().then(() => {
+                return this.update(content)
+            })
         const data = JSON.stringify({
             content,
             lastHashId: this.latestHashId
