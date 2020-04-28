@@ -23,17 +23,16 @@ Page({
 
   newDir: function(){
     const self = this;
-    //document.createDocument(self.data.doc.name, self.data.doc.getPath(), null)
-    //.then((newDocument, timestamp)=>{
-     // wx.showToast({title: "新建文件成功！"+ timestamp});
-      wx.showToast({title: "新建文件成功！"});
+    document.createDocument(self.data.doc.name, self.data.doc.getPath(), "")
+    .then(()=>{
+      wx.showToast({title: "新建文件夹成功！"});
       self.data.cwd.addChild(self.data.doc);
       wx.navigateBack({//返回
         delta: 1
       });
-    /*})
+    })
     .catch((e) =>{
       wx.showToast({title: "新建文件失败!"})
-    })*/
+    })
   }
 })

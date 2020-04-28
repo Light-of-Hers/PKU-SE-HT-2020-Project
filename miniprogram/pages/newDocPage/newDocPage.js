@@ -21,9 +21,10 @@ Page({
 
   newDoc: function(){
     const self = this;
-    document.createDocument(self.data.doc.name, self.data.doc.getPath(), null)
+    document.createDocument(self.data.doc.name, self.data.doc.getPath(), "")
     .then((newDocument, timestamp)=>{
       wx.showToast({title: "新建文件成功！"+ timestamp});
+      self.data.doc.doc = newDocument;
       self.data.cwd.addChild(self.data.doc);
       wx.navigateBack({//返回
         delta: 1
