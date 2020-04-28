@@ -12,9 +12,15 @@
     <view>
         <text>导入Credential</text>
         <input bindinput="bindCredentialInput"
+            confirm-type="next" 
+            placeholder="Credential" />
+        <input bindinput="bindPublicKeyInput"
+            confirm-type="next" 
+            placeholder="PublicKey" />
+        <input bindinput="bindPrivateKeyInput"
             bindconfirm="login"
             confirm-type="done" 
-            placeholder="Credential" />
+            placeholder="PrivateKey" />
         <button bindtap="login">导入</button>
     </view>
 </view>

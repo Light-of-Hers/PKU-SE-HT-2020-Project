@@ -20,11 +20,7 @@ App({
 
     document.init()
     identity.init()
-    document.userInit()
 
-    this.globalData = {}
-
-    const fsys = require("./service/filesys");
-    this.globalData.root = fsys.buildFS(document.documentList);
+    this.globalData = {root: null}
   }
 })

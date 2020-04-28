@@ -1,30 +1,22 @@
 const sdk = require('miniprogram-taas-sdk')
 
 module.exports = {
-    credential: null,
-    publicKey: null,
-    privateKey: null,
-    registered: false,
+    credential: undefined,
 
     init: function() {
         const data = wx.getStorageSync("identity")
         if(!data)
             return
-        this.credential = data.credential
-        this.publicKey = data.publicKey
-        this.privateKey = data.privateKey       
+        console.log('Identity Init')
+        console.log(data)
+        this.credential = data
 
         if(this.credential)
             this.registered = true
     },
 
     save: function() {
-        const data = {
-            credential: this.credential,
-            publicKey: this.publicKey,
-            privateKey: this.privateKey
-        }
-        wx.setStorageSync("identity", data)
+        wx.setStorageSync("identity", this.credential)
     },
 
     register: function(invitationCode) {
@@ -33,9 +25,7 @@ module.exports = {
                 if(err) {
                     reject(err)
                 } else {
-                    this.credential = data.credential
-                    this.publicKey = data.publicKey
-                    this.privateKey = data.privateKey
+                    this.credential = data
                     this.save()
                     this.registered = true
                     resolve(this.credential)

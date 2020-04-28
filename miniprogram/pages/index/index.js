@@ -7,16 +7,18 @@ const document = require('../../service/document')
 Page({
   data: {
     invitationCode: '',
-    credential: ''
+    credential: {
+      credential: '',
+      publicKey: '',
+      privateKey: ''
+    }
   },
 
   onLoad: function() {
-    wx.redirectTo({
-      url: '../browsePage/browsePage',
-    })
     if(identity.registered) {
-      console.log(identity.credential)
-      //TODO: 跳转至文档页
+      wx.redirectTo({
+        url: '../browsePage/browsePage',
+      })
     }
   },
 
@@ -25,7 +27,15 @@ Page({
   },
 
   bindCredentialInput: function(e) {
-    this.data.credential = e.detail.value
+    this.data.credential.credential = e.detail.value
+  },
+
+  bindPublicKeyInput: function(e) {
+    this.data.credential.publicKey = e.detail.value
+  },
+
+  bindPrivateKeyInput: function(e) {
+    this.data.credential.privateKey = e.detail.value
   },
 
   register: function() {
@@ -36,7 +46,9 @@ Page({
     })
     .then(() => {
       wx.showToast({title: "注册成功！"})
-      //TODO: 跳转至文档页
+      wx.redirectTo({
+        url: '../browsePage/browsePage',
+      })
     })
     .catch((e) => {
       wx.showToast({title: "注册失败：" + e.message, icon: "none"})
@@ -45,10 +57,13 @@ Page({
 
   login: function() {
     identity.login(this.data.credential)
+    console.log(identity.credential)
     document.userInit()
     .then(() => {
       wx.showToast({title: "导入成功！", time: 2000})
-      console.log(document.documentList)
+      wx.redirectTo({
+        url: '../browsePage/browsePage',
+      })
     })
     .catch((e) => {
       wx.showToast({title: "导入失败：" + e.message, icon: "none"})

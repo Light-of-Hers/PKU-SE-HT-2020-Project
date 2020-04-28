@@ -58,13 +58,15 @@ class Document {
             lastHashId: this.latestHashId
         })
         return new Promise((resolve, reject) => {
+            let hashid
             sdk.promises.storeEvidence(data, null, identity.credential)
-            .then(({hashId}) => {
-                console.log(hashId)
-                return sdk.promises.queryEvidence(hashId, null, identity.credential)
+            .then(({hash}) => {
+                hashid = hash
+                console.log("New Document HashID: " + hash)
+                return sdk.promises.queryEvidence(hash, null, identity.credential)
             })
             .then(({timestamp}) => {
-                this.latestHashId = hashId
+                this.latestHashId = hashid
                 this.ready = false
                 document.save()
                 resolve(timestamp)
@@ -76,17 +78,28 @@ class Document {
     }
 }
 
-module.exports = {
+const document = {
     documentList: null,
 
     init: function() {
         this.documentList = []
-        //TODO: 从本地缓存中恢复文档列表
+        const data = wx.getStorageSync('documentList')
+        if(!data)
+            return
+        this.documentList = data.map(x => new Document(x.id, x.name, x.path, x.hashId))
         console.log('Document Manager Init')
     },
 
     save: function() {
-        //TODO: 将文档列表保存至缓存
+        const data = this.documentList.map((x) => {
+            return {
+                id: x.id,
+                name: x.name,
+                path: x.path,
+                hashId: x.latestHashId
+            }
+        })
+        wx.setStorageSync('documentList', data)
     },
 
     createDocument: function(name, path, content) {
@@ -116,3 +129,5 @@ module.exports = {
         throw('Not implement')
     }    
 }
+
+module.exports = document

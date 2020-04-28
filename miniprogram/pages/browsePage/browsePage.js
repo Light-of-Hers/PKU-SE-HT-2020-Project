@@ -1,4 +1,5 @@
 const fs = require("../../service/filesys");
+const document = require("../../service/document")
 const app = getApp();
 
 Page({
@@ -9,10 +10,9 @@ Page({
     },
     onLoad: function () {
         const self = this; // 静态绑定this，仅个人习惯
+        if(!app.globalData.root)
+            app.globalData.root = fs.buildFS(document.documentList);
         const dir = app.globalData.root;
-        dir.addChild(new fs.DirFile("dir1"));
-        dir.addChild(new fs.DirFile("dir2"));
-        dir.addChild(new fs.DirFile("dir3"));
         self.changeDir(dir);
     },
     onShow: function () {
