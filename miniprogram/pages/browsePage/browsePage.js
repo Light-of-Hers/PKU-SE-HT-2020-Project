@@ -10,7 +10,7 @@ Page({
     },
     onLoad: function () {
         const self = this; // 静态绑定this，仅个人习惯
-        if(!app.globalData.root)
+        if (!app.globalData.root)
             app.globalData.root = fs.buildFS(document.documentList);
         const dir = app.globalData.root;
         self.changeDir(dir);
@@ -41,7 +41,7 @@ Page({
             files: self.data.files,
         });
     },
-    browseFile: function (event) {
+    onViewFile: function (event) {
         const self = this;
         const idx = event.currentTarget.dataset.fileIndex;
         const file = self.data.files[idx].file;
@@ -56,15 +56,20 @@ Page({
             self.changeDir(file);
         }
     },
-    uploadFile: function () {
+    onNewDoc: function () {
         const self = this;
+        self.data.needRerender = true;
+        app.globalData.tmp_arg = self.data.cwd;
         wx.navigateTo({
-            url: '../uploadPage/uploadPage',
-            events: {
-                newFileCreated: () => self.data.needRerender = true,
-                passCwd: null,
-            },
-            success: res => res.eventChannel.emit("passCwd", self.data.cwd),
+            url: '../newDocPage/newDocPage',
+        });
+    },
+    onNewFolder: function () {
+        const self = this;
+        self.data.needRerender = true;
+        app.globalData.tmp_arg = self.data.cwd;
+        wx.navigateTo({
+            url: '../newFolderPage/newFolderPage',
         });
     },
 })

@@ -1,10 +1,13 @@
 <view class="container">
-    <view class="uploader" bindtap="uploadFile">
-        <text class="uploader-text">上传</text>
+    <view class="uploader" bindtap="onNewDoc">
+        <text class="uploader-text">新建文档</text>
+    </view>
+    <view class="uploader" bindtap="onNewFolder">
+        <text class="uploader-text">新建目录</text>
     </view>
 
     <view wx:for="{{files}}" wx:key="name">
-        <view class="uploader" data-file-index="{{index}}" bindtap="browseFile">
+        <view class="uploader" data-file-index="{{index}}" bindtap="onViewFile">
             <text class="uploader-text">{{item.name}}</text>
         </view>
     </view>
