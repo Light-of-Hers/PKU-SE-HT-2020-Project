@@ -1,53 +1,64 @@
-/**index.wxss**/
-
 page {
-    background: #f6f6f6;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-.userinfo, .uploader, .tunnel {
-    margin-top: 40rpx;
-    height: 140rpx;
-    width: 100%;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-left: none;
-    border-right: none;
+.container {
+    flex-wrap: wrap;
+    /* background: #efeff4; */
+    font-family: 'Fira Code', 'Mononoki', 'Consolas', 'Arial';
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    transition: all 300ms ease;
+    display: -webkit-flex;
+    box-sizing: border-box;
 }
 
-.uploader, .tunnel {
-    height: auto;
-    padding: 0 0 0 40rpx;
+.col {
+    width: 26%;
+    padding-top: 33%;
+    margin: 25rpx 3.666666%;
+    position: relative;
+}
+
+.item {
+    width: 100%;
+    height: 100%;
+    border-radius: 20rpx;
+    overflow: hidden;
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    box-sizing: border-box;
 }
 
-.uploader-text, .tunnel-text {
-    width: 100%;
-    line-height: 52px;
-    font-size: 50rpx;
-    color: #007aff;
+.item .icon {
+    flex: 1;
 }
 
-.uploader-container {
-    width: 100%;
-    height: 400rpx;
-    padding: 20rpx 20rpx 20rpx 0;
+.item .icon, .item .bottom {
     display: flex;
-    align-content: center;
+    flex-flow: row nowrap;
+    align-items: center;
     justify-content: center;
-    box-sizing: border-box;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.uploader-image {
-    width: 100%;
-    height: 360rpx;
+.item .bottom {
+    height: 80rpx;
+    font-size: 22rpx;
+}
+
+.item .txt {
+    flex: 1;
+    text-align: center;
+}
+
+.item .bottom .txt {
+    color: black;
+    font-size: 30rpx;
+}
+
+.item image {
+    width: 120rpx;
+    height: 120rpx;
 }

@@ -14,6 +14,7 @@ Page({
             app.globalData.root = fs.buildFS(document.documentList);
         const dir = app.globalData.root;
         self.changeDir(dir);
+        self.viewFile(dir.getChild("main"));
     },
     onShow: function () {
         const self = this;
@@ -35,16 +36,22 @@ Page({
     render: function () {
         const self = this;
         console.log("rendering page...");
-        self.data.files = Array.from(self.data.cwd.children.entries()).filter(item => item[1]).
-            map(item => ({ name: item[1] instanceof fs.DirFile ? `${item[0]}/` : item[0], file: item[1] }));
+        self.data.files = Array.from(self.data.cwd.children.entries())
+            .filter(item => item[1])
+            .map(item => {
+                const isDir = item[1] instanceof fs.DirFile;
+                return {
+                    name: isDir ? `${item[0]}/` : item[0],
+                    type: isDir ? "dir" : "doc",
+                    file: item[1],
+                };
+            });
         self.setData({
             files: self.data.files,
         });
     },
-    onViewFile: function (event) {
+    viewFile: function (file) {
         const self = this;
-        const idx = event.currentTarget.dataset.fileIndex;
-        const file = self.data.files[idx].file;
         if (file instanceof fs.DocFile) {
             console.log(`click DocFile: ${file.name}`);
             app.globalData.tmp_arg = file;
@@ -55,6 +62,12 @@ Page({
             console.log(`click DirFile: ${file.name}`);
             self.changeDir(file);
         }
+    },
+    onViewFile: function (event) {
+        const self = this;
+        const idx = event.currentTarget.dataset.fileIndex;
+        const file = self.data.files[idx].file;
+        self.viewFile(file);
     },
     onNewDoc: function () {
         const self = this;
