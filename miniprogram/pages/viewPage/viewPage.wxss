@@ -5,6 +5,11 @@
   border-radius: 10rpx;
   box-shadow: 0 0 5rpx #e0e0e0;
   line-height: 50rpx;
+  overflow-wrap: break-word;
+}
+
+.loading {
+  text-align: center;
 }
 
 .time-stamp {
