@@ -14,10 +14,23 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.doc.name
     })
+    this.data.doc.doc.download()
+    .then(() => {
+      if(this.data.doc.doc.versions.length)
+        this.setData({
+          input: this.data.doc.doc.versions[0].content
+        })
+    })
   },
   inputChangeHandle: function(e) {
     this.setData({
       input: e.detail.value
+    })
+  },
+
+  clearInput: function() {
+    this.setData({
+      input: ''
     })
   },
 

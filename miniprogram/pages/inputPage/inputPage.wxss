@@ -1,4 +1,5 @@
 .container {
+  min-height: 80vh;
   margin: 20rpx;
   padding: 20rpx;
   border: 1rpx solid #e0e0e0;
@@ -10,4 +11,10 @@
   border-radius: 98rpx;
   background: bg_blue;
   color: #042f6b;
+}
+
+.btn-wrap {
+  margin: 20rpx;
+  display: flex;
+  justify-content: space-between;
 }

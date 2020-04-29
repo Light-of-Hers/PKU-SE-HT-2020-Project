@@ -6,5 +6,8 @@
             style = "width: 650rpx;"
             maxlength = "{{-1}}" auto-height/>
   </view>
-  <button class = "btn" bindtap = "updateFile"> 确认 </button>
+  <view class = "btn-wrap">
+    <button class = "btn" bindtap = "clearInput"> 清空内容 </button>
+    <button class = "btn" bindtap = "updateFile"> 确认 </button>
+  </view>
 </view>
