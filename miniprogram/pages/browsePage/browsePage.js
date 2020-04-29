@@ -14,7 +14,7 @@ Page({
             app.globalData.root = fs.buildFS(document.documentList);
         const dir = app.globalData.root;
         self.changeDir(dir);
-        self.viewFile(dir.getChild("main"));
+        self.viewFile(Array.from(dir.children.values()).find(file => file && file.getId() === 0));
     },
     onShow: function () {
         const self = this;
