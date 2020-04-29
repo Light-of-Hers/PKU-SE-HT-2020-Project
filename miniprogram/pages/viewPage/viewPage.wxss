@@ -35,3 +35,9 @@
 .no-version {
   text-align: center;
 }
+
+.update-module {
+  border-top: 1rpx solid #e0e0e0;
+  margin-top: 50rpx;
+  padding-top: 20rpx;
+}

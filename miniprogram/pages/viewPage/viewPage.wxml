@@ -23,5 +23,9 @@
         <text> 还没有开始写哦~ </text>
       </view>
     </block>
+    <view class = "update-module">
+      <button style = "width:100%;"
+              bindtap = "updateFile"> 更新文件 </button>
+    </view>
   </view>
 </view>

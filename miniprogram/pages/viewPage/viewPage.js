@@ -10,7 +10,7 @@ Page({
     loading: true
   },
 
-  onLoad: function() {
+  onShow: function() {
     const self = this;
     app.globalData.tmp_arg.getVersions().then(function(res) {
       self.setData({
@@ -69,5 +69,11 @@ Page({
         content: '当前版本已为最新版本'
       })
     }
+  },
+
+  updateFile: function() {
+    wx.navigateTo({
+      url: '../inputPage/inputPage',
+    });
   }
 })
