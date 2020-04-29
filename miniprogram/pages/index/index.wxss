@@ -1,0 +1,31 @@
+.register {
+  margin-top: 50rpx;
+  border-top: 1rpx solid #e0e0e0;
+}
+
+.input {
+  width: 90%;
+  height: 80rpx;
+  margin: 0 auto;
+  padding-left: 30rpx;
+  border:1px solid #ccc;
+  border-radius: 50rpx;
+  margin: 20rpx;
+}
+
+.login-btn {
+  border-radius: 98rpx;
+  background-color: #78bafc;
+  color: #f0f1f3;
+}
+
+.register-btn {
+  border-radius: 98rpx;
+  background-color: rgb(5, 21, 78);
+  color: #f0f1f3;
+}
+
+.icon-img {
+  margin: 30rpx;
+  text-align: center;
+}

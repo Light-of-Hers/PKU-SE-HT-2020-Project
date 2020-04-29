@@ -1,26 +1,34 @@
 <!--index.wxml-->
 <view class="container">
-    <view>
-        <text>通过邀请码注册</text>
-        <input bindinput="bindInvitationCodeInput" 
-            bindconfirm="register"
-            confirm-type="done" 
-            placeholder="邀请码" />
-        <button bindtap="register">注册</button>
+    <view class = "icon-img">
+      <image style = "height: 150rpx; width: 125rpx;"
+            src = "icon.png"/>
     </view>
-
-    <view>
-        <text>导入Credential</text>
-        <input bindinput="bindCredentialInput"
+    <view class = "log-in">
+        <!-- <text>导入Credential</text> -->
+        <input class = "input"
+            bindinput="bindCredentialInput"
             confirm-type="next" 
             placeholder="Credential" />
-        <input bindinput="bindPublicKeyInput"
+        <input class = "input"
+            bindinput="bindPublicKeyInput"
             confirm-type="next" 
             placeholder="PublicKey" />
-        <input bindinput="bindPrivateKeyInput"
+        <input class = "input"
+            bindinput="bindPrivateKeyInput"
             bindconfirm="login"
             confirm-type="done" 
             placeholder="PrivateKey" />
-        <button bindtap="login">导入</button>
+        <button class = "login-btn" bindtap="login">导入</button>
+    </view>
+
+    <view class = "register">
+        <!-- <text>通过邀请码注册</text> -->
+        <input class = "input"
+            bindinput="bindInvitationCodeInput" 
+            bindconfirm="register"
+            confirm-type="done" 
+            placeholder="请输入邀请码" />
+        <button class = "register-btn" bindtap="register">注册</button>
     </view>
 </view>
