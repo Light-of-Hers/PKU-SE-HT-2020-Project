@@ -14,13 +14,5 @@ App({
     //     traceUser: true,
     //   })
     // }
-
-    const document = require('service/document')
-    const identity = require('service/identity')
-
-    document.init()
-    identity.init()
-
-    this.globalData = {root: null}
   }
 })
