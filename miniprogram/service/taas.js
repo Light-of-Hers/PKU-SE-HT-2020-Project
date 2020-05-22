@@ -2,6 +2,20 @@ const sdk = require("miniprogram-taas-sdk")
 
 module.exports = {
     credential: null,
+    contractId: undefined,
+    initContract() {
+        return this.getContractList()
+        .then((data) => {
+            const contractList = JSON.parse(data.data)
+            for(let c of contractList) {
+                if(c.name == 'HomeForCreatorTest') {
+                    this.contractId = c.id
+                    return c.id
+                }
+            }
+            return Promise.reject("Contract ID not found")
+        })
+    },
     getCredential(invitationCode) {
         return new Promise((resolve, reject)=>{
             sdk.getCredential(invitationCode, null, (err, data)=>{
@@ -49,7 +63,7 @@ module.exports = {
     },
     executeContract(contractInfo) {
         return new Promise((resolve, reject)=>{
-            sdk.executeContract(contractInfo, null, this.credential, (err, obj) => {
+            sdk.executeContract({id:this.contractId, ...contractInfo}, null, this.credential, (err, obj) => {
                 if(err){
                     reject(err)
                 } else{
