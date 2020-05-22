@@ -1,21 +1,24 @@
 class BaseFile {
     name = ""
     parent = null
+    id = -1
 
-    constructor(name, parent = null) {
+    constructor(name, id, parent = null) {
         this.name = name;
         this.parent = parent;
+        this.id = id;
     }
     setParent(p) { this.parent = p; }
     getPath() { throw "Not implemented"; }
     toString() { throw "Not implemented"; }
+    getId() { return this.id; }
 }
 
 class DocFile extends BaseFile {
     doc = null
 
     constructor(name, doc, parent = null) {
-        super(name, parent);
+        super(name, doc.id, parent);
         this.doc = doc;
     }
     getPath() {
@@ -25,16 +28,12 @@ class DocFile extends BaseFile {
         }
         return res;
     }
-    getId() {
-        return this.doc.id;
-    }
     async getVersions() {
-        if (!this.doc.ready)
-            await this.doc.download();
+        await this.doc.sync();
         return this.doc.versions;
     }
     async update(content) {
-        return await this.doc.update(content);
+        return await this.doc.createVersion(content);
     }
     toString() {
         return this.getId().toString();
@@ -44,8 +43,8 @@ class DocFile extends BaseFile {
 class DirFile extends BaseFile {
     children = new Map();
 
-    constructor(name, parent = null) {
-        super(name, parent);
+    constructor(name, id, parent = null) {
+        super(name, id, parent);
         this.children.set("..", this.parent);
     }
     getPath() {
