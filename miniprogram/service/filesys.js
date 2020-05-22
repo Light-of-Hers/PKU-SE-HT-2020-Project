@@ -43,7 +43,7 @@ class DocFile extends BaseFile {
 class DirFile extends BaseFile {
     children = new Map();
 
-    constructor(name, id, parent = null) {
+    constructor(name, id = -1, parent = null) {
         super(name, id, parent);
         this.children.set("..", this.parent);
     }
@@ -100,8 +100,12 @@ function buildFS(docs) {
             }
             cur_dir = dir;
         }
-        if (cur_dir.getChild(fname) === undefined)
-            cur_dir.addChild(path.endsWith("/") ? new DirFile(fname) : new DocFile(fname, doc));
+        const chld = cur_dir.getChild(fname);
+        if (chld === undefined) {
+            cur_dir.addChild(path.endsWith("/") ? new DirFile(fname, doc.id) : new DocFile(fname, doc));
+        } else if (chld instanceof DirFile) {
+            chld.id = doc.id;
+        }
     }
     return fs;
 }
