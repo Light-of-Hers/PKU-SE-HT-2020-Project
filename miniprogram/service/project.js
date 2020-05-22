@@ -9,12 +9,12 @@ class Project {
         this.mainDocuments = []
         this.subDocuments = []
         this.FSRoot = buildFS(this.subDocuments)
-        this.lastSyncTime = 0
+        this._time = 0
         this._nextid = 0
     }
 
     sync() {
-
+        return Promise.resolve()
     }
 
     syncDocuments() {
@@ -26,10 +26,6 @@ class Project {
                 return d.sync()
             }))
         ])
-    }
-
-    rename() {
-
     }
 
     findDocumentByID(id) {
