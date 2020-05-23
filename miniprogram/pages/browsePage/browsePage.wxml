@@ -28,13 +28,16 @@
 
     <block wx:for="{{files}}" wx:key="name">
         <view class="col">
-            <view class='item' data-file-index="{{index}}" bindtap="onViewFile">
+            <view class='item' data-file-index="{{index}}" bindtap="onViewFile" bindlongpress="onDeleteFile">
                 <view class='icon'>
                     <view wx:if="{{item.type === 'dir'}}">
                         <image src="./folder.svg"></image>
                     </view>
-                    <view wx:elif="{{item.type === 'doc'}}">
-                        <image src="./document.svg"></image>
+                    <view wx:elif="{{item.type === 'txt'}}">
+                        <image src="./text.svg"></image>
+                    </view>
+                    <view wx:elif="{{item.type === 'img'}}">
+                        <image src="./image.svg"></image>
                     </view>
                 </view>
                 <view class='bottom'>
