@@ -1,8 +1,7 @@
 //index.js
 const app = getApp()
 
-const identity = require('../../service/identity')
-const document = require('../../service/document')
+const client = require('../../service/client.js')
 
 Page({
   data: {
@@ -15,11 +14,15 @@ Page({
   },
 
   onLoad: function() {
-    if(identity.registered) {
+    client.loadLocal()
+    .then(() => {
       wx.redirectTo({
         url: '../browsePage/browsePage',
       })
-    }
+    })
+    .catch((e) => {
+      console.log(e)
+    })
   },
 
   bindInvitationCodeInput: function(e) {
@@ -39,16 +42,13 @@ Page({
   },
 
   register: function() {
-    identity.register(this.data.invitationCode)
-    .then((credential) => {
-      console.log(credential)
-      return document.userInit()
-    })
+    client.register(invitationCode, 'test')
     .then(() => {
       wx.showToast({title: "注册成功！"})
-      wx.redirectTo({
-        url: '../browsePage/browsePage',
-      })
+      console.log(client.getUser())
+      // wx.redirectTo({
+      //   url: '../browsePage/browsePage',
+      // })
     })
     .catch((e) => {
       wx.showToast({title: "注册失败：" + e.message, icon: "none"})
@@ -56,17 +56,12 @@ Page({
   },
 
   login: function() {
-    identity.login(this.data.credential)
-    console.log(identity.credential)
-    document.userInit()
+    client.login(credential)
     .then(() => {
-      wx.showToast({title: "导入成功！", time: 2000})
-      wx.redirectTo({
-        url: '../browsePage/browsePage',
-      })
+      console.log(client.getUser())
     })
     .catch((e) => {
-      wx.showToast({title: "导入失败：" + e.message, icon: "none"})
+      console.log(e)
     })
   }
 })
