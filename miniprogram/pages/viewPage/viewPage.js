@@ -1,51 +1,58 @@
 const fs = require('../../service/filesys');
+const Document = require('../../service/document');
 const app = getApp();
 const time = require('util')
 
 Page({
   data: {
-    allVersions: null, 
+    doc: null, 
     curIndex: 0,
     curtime: null,
+    curtext: null,
+    curpath: null,
     loading: true
+  },
+  onLoad: function() {
+    this.setData({
+      doc: app.globalData.tmp_arg
+    });
+    wx.setNavigationBarTitle({
+      title: this.data.doc.name
+    })
   },
 
   onShow: function() {
     const self = this;
-    app.globalData.tmp_arg.getVersions().then(function(res) {
+    if (self.data.doc.versions.length != 0) {
+      self.data.doc.versions[0].getContent().then(function(res) {
+        self.setData({
+          curtime: time.formatDate(self.data.doc.versions[0].timestamp),
+          curtext: res.text,
+          curpath: res.path,
+          loading: false
+        })
+      }) .catch((e) => {
+        console.error(e);
+        wx.showModal({
+          title: "提示",
+          content: "数据加载失败",
+          success (res) {
+            wx.navigateBack({})
+          }
+        })
+      })
+    }
+    else {
       self.setData({
-        allVersions: res,
         loading: false
       })
-
-      if (self.data.allVersions.length) {
-        self.setData({
-          curtime: time.formatDate(self.data.allVersions[self.data.curIndex].timestamp)
-        })
-      }
-    }) .catch((e) => {
-      console.error(e);
-      wx.showModal({
-        title: "提示",
-        content: "数据加载失败",
-        success (res) {
-          wx.navigateBack({})
-        }
-      })
-    })
-
-    wx.setNavigationBarTitle({
-      title: app.globalData.tmp_arg.name
-    })
+    }
   },
 
   oldVersion: function() {
     var tempIndex = this.data.curIndex + 1;
-    if (tempIndex < this.data.allVersions.length) {
-      this.setData({
-        curIndex: tempIndex,
-        curtime: time.formatDate(this.data.allVersions[tempIndex].timestamp)
-      })
+    if (tempIndex < this.data.doc.versions.length) {
+        this.changeVersion(tempIndex);
     }
     else {
       wx.showModal({
@@ -58,10 +65,7 @@ Page({
   newVersion: function() {
     var tempIndex = this.data.curIndex - 1;
     if (tempIndex >= 0) {
-      this.setData({
-        curIndex: tempIndex,
-        curtime: time.formatDate(this.data.allVersions[tempIndex].timestamp)
-      })
+     this.changeVersion(tempIndex);
     }
     else {
       wx.showModal({
@@ -75,5 +79,31 @@ Page({
     wx.navigateTo({
       url: '../inputPage/inputPage',
     });
+  },
+
+  changeVersion: function(tempIndex) {
+    const self = this;
+    self.setData({
+      loading: true
+    });
+    
+    self.data.doc.versions[tempIndex].getContent().then(function(res) {
+      self.setData({
+        curIndex: tempIndex,
+        curtime: time.formatDate(self.data.doc.versions[tempIndex].timestamp),
+        curtext: res.text,
+        curpath: res.path,
+        loading: false
+      })
+    }) .catch((e) => {
+      console.error(e);
+      wx.showModal({
+        title: "提示",
+        content: "数据加载失败",
+        success (res) {
+          wx.navigateBack({})
+        }
+      })
+    })
   }
 })

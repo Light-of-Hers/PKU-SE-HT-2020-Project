@@ -4,23 +4,27 @@ const app = getApp();
 Page({
   data : {
     doc: null,
-    input: ''
+    input: '',
+    imgpath: ''
   },
 
   onLoad: function() {
-    this.setData({
+    const self = this;
+    self.setData({
       doc: app.globalData.tmp_arg
     })
     wx.setNavigationBarTitle({
-      title: this.data.doc.name
+      title: self.data.doc.name
     })
-    this.data.doc.doc.download()
-    .then(() => {
-      if(this.data.doc.doc.versions.length)
-        this.setData({
-          input: this.data.doc.doc.versions[0].content
+
+    if (self.data.doc.versions.length) {
+      self.data.doc.versions[0].getContent().then(function (res) {
+        self.setData({
+          input: res.text,
+          imgpath: res.path
         })
-    })
+      })
+    }
   },
   inputChangeHandle: function(e) {
     this.setData({
@@ -35,7 +39,43 @@ Page({
   },
 
   updateFile: function() {
-    this.data.doc.update(this.data.input)
+    this.data.doc.createVersion({"text": this.data.input})
+    .then(function(res) {
+      wx.showToast({
+        title: '上传成功',
+        icon: 'success',
+        duration: 2000
+      })
+      setTimeout(function() {
+        wx.navigateBack({})
+      }, 2000)
+    })
+    .catch((e) => {
+      console.error(e)
+      wx.showModal({
+        title: "提示",
+        content: "上传失败",
+        success (res) {
+          if (res.confirm) {
+            wx.navigateBack({})
+          }
+        }
+      })
+    })
+  },
+  getImg: function() {
+    const self = this;
+    wx.chooseImage({
+      success: function(res) {
+        self.setData({
+          imgpath: res.tempFilePaths[0]
+        })
+      }
+    })
+  },
+
+  updateImg: function() {
+    this.data.doc.createVersion({"path": this.data.imgpath})
     .then(function(res) {
       wx.showToast({
         title: '上传成功',

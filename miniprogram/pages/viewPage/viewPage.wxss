@@ -1,4 +1,4 @@
-.container {
+.text-container {
   height: 60vh;
   margin: 20rpx;
   padding: 30rpx;
@@ -8,6 +8,11 @@
   line-height: 50rpx;
   overflow-wrap: break-word;
   overflow: scroll;
+}
+
+.image-container {
+  display: flex;
+  margin: 20rpx;
 }
 
 .loading {

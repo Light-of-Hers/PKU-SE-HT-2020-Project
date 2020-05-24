@@ -1,15 +1,21 @@
 <view>
-  <view class = "loading" hidden = "{{!loading}}">
-    <text> 加载中... </text>
-  </view>
+  <loading hidden = "{{!loading}}"> 加载中... </loading>
   <view hidden = "{{loading}}">
-    <block wx:if = "{{allVersions.length}}">
+    <block wx:if = "{{doc.versions.length}}">
       <view class = "time-stamp">
         <text> {{curtime}} </text>
       </view>
-      <view class = "container">
-        <text> {{allVersions[curIndex].content}} </text>
-      </view>
+      <block wx:if = "{{doc.type == 'text'}}">
+        <view class = "text-container">
+          <text> {{curtext}} </text>
+        </view>  
+      </block>
+      <block wx:elif = "{{doc.type == 'image'}}">
+        <view class = "image-container">
+          <image src = "{{curpath}}" mode = "aspectFill"/>
+        </view>
+      </block> 
+
       <view class = "btn">
         <button class = "new-btn" bindtap = "newVersion"> 新版本 </button>
         <button class = "new-btn" bindtap = "oldVersion"> 老版本 </button>
@@ -20,7 +26,7 @@
         <image src = "no-version.png" style = "height: 200rpx; width: 200rpx;" mode = "aspectFit"/>
       </view>
       <view class = "no-version">
-        <text> 还没有开始写哦~ </text>
+        <text> 还没有开始哦~ </text>
       </view>
     </block>
     <view class = "update-module">

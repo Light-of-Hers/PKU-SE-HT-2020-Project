@@ -1,10 +1,15 @@
-.container {
+.text-container {
   min-height: 80vh;
   margin: 20rpx;
   padding: 20rpx;
   border: 1rpx solid #e0e0e0;
   border-radius: 10rpx;
   box-shadow: 0 0 5rpx #e0e0e0;
+}
+
+.image-container {
+  display: flex;
+  margin: 20rpx;
 }
 
 .btn {

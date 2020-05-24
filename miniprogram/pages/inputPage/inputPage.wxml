@@ -1,13 +1,22 @@
 <view>
-  <view class = "container">
-    <textarea value = "{{input}}" 
-            placeholder = "请输入内容" 
-            bindinput = "inputChangeHandle" 
-            style = "width: 650rpx;"
-            maxlength = "{{-1}}" auto-height/>
-  </view>
-  <view class = "btn-wrap">
-    <button class = "btn" bindtap = "clearInput"> 清空内容 </button>
-    <button class = "btn" bindtap = "updateFile"> 确认 </button>
-  </view>
+  <block wx:if = "{{doc.type == 'text'}}">
+    <view class = "text-container">
+      <textarea value = "{{input}}" 
+              placeholder = "请输入内容" 
+              bindinput = "inputChangeHandle" 
+              style = "width: 650rpx;"
+              maxlength = "{{-1}}" auto-height/>
+    </view>
+    <view class = "btn-wrap">
+      <button class = "btn" bindtap = "clearInput"> 清空内容 </button>
+      <button class = "btn" bindtap = "updateFile"> 确认 </button>
+    </view>
+  </block>
+  <block wx:elif = "{{doc.type == 'image'}}">
+    <button class = "btn" bindtap = "getImg"> 上传图片 </button>
+      <view class = "image-container">
+        <image src = "{{imgpath}}" mode = "aspectFill" hidden = "{{imgpath == ''}}"/>
+      </view>
+    <button class = "btn" bindtap = "updateImg"> 确认 </button>
+  </block>
 </view>
