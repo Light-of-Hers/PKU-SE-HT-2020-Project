@@ -51,10 +51,10 @@ class Project {
                 this.name = data.name
                 this._nextid = data.nextid
                 this.mainDocuments = data.mainDocuments.map((v) => {
-                    return new Document({...v, isMain: true})
+                    return new Document({...v, isMain: true, projectId: this.id})
                 })
                 this.subDocuments = data.subDocuments.map((v) => {
-                    return new Document({...v, isMain: false})
+                    return new Document({...v, isMain: false, projectId: this.id})
                 })
                 this.FSRoot = buildFS(this.subDocuments)
             }
@@ -83,6 +83,7 @@ class Project {
     createMainDocument(name, type) {
         const d = new Document({
             id: this._nextid,
+            projectId: this.id,
             name: name,
             type: type,
             isMain: true
@@ -97,6 +98,7 @@ class Project {
     createSubDocument(name, type, path) {
         const d = new Document({
             id: this._nextid,
+            projectId: this.id,
             name: name,
             type: type,
             path: path,
