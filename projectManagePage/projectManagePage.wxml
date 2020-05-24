@@ -1,0 +1,30 @@
+<view class="container">
+    <block wx:if = "{{!user}}">
+        <view class = "login-note">
+            <image src = "./icon.png"/>
+            <text> 您还没有登录哦~ </text>
+        </view>
+    </block>
+    <block wx:else>
+        <view class='item' bindtap="onNewProject">
+            <image src="./add.png"></image>
+            <view class='txt'>
+                新建作品
+            </view>
+        </view>
+
+        <block wx:for="{{projects}}" wx:key="name">
+            <view class='item' data-file-index="{{index}}" bindtap="onViewProject" bindlongpress = "deleteProject">
+                <image src="./pro.png"></image>
+                <view class = "text-container">
+                    <view class='txt'>
+                        {{item.name}}
+                    </view>
+                    <view class= 'time-txt'>
+                        修改日期：{{formatTime[index]}}
+                    </view>
+                </view>
+            </view>
+        </block>
+    </block>
+</view>
