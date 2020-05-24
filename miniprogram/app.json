@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/browsePage/browsePage",
+    "pages/inputPage/inputPage",
+    "pages/newDocPage/newDocPage",
+    "pages/newFolderPage/newFolderPage",
+    "pages/uploadPage/uploadPage",
+    "pages/viewPage/viewPage"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "我的创作家园",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

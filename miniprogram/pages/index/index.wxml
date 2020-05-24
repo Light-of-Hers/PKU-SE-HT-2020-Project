@@ -1,0 +1,34 @@
+<!--index.wxml-->
+<view class="container">
+    <view class = "icon-img">
+      <image style = "height: 150rpx; width: 125rpx;"
+            src = "icon.png"/>
+    </view>
+    <view class = "log-in">
+        <!-- <text>导入Credential</text> -->
+        <input class = "input"
+            bindinput="bindCredentialInput"
+            confirm-type="next" 
+            placeholder="Credential" />
+        <input class = "input"
+            bindinput="bindPublicKeyInput"
+            confirm-type="next" 
+            placeholder="PublicKey" />
+        <input class = "input"
+            bindinput="bindPrivateKeyInput"
+            bindconfirm="login"
+            confirm-type="done" 
+            placeholder="PrivateKey" />
+        <button class = "login-btn" bindtap="login">导入</button>
+    </view>
+
+    <view class = "register">
+        <!-- <text>通过邀请码注册</text> -->
+        <input class = "input"
+            bindinput="bindInvitationCodeInput" 
+            bindconfirm="register"
+            confirm-type="done" 
+            placeholder="请输入邀请码" />
+        <button class = "register-btn" bindtap="register">注册</button>
+    </view>
+</view>

@@ -1,0 +1,6 @@
+<view>
+	<text>输入新建文件名</text>
+	<input bindinput="bindDocNameInput"/>
+	<button bindtap="newDoc">新建
+	</button>
+</view>

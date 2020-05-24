@@ -1,0 +1,52 @@
+<view class="container">
+
+    <view class="col">
+        <view class='item' bindtap="onNewDoc">
+            <view class='icon'>
+                <image src="./document-new.svg"></image>
+            </view>
+            <view class='bottom'>
+                <view class='txt'>
+                    新建文档
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="col">
+        <view class='item' bindtap="onNewFolder">
+            <view class='icon'>
+                <image src="./folder-new.svg"></image>
+            </view>
+            <view class='bottom'>
+                <view class='txt'>
+                    新建目录
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <block wx:for="{{files}}" wx:key="name">
+        <view class="col">
+            <view class='item' data-file-index="{{index}}" bindtap="onViewFile" bindlongpress="onDeleteFile">
+                <view class='icon'>
+                    <view wx:if="{{item.type === 'dir'}}">
+                        <image src="./folder.svg"></image>
+                    </view>
+                    <view wx:elif="{{item.type === 'txt'}}">
+                        <image src="./text.svg"></image>
+                    </view>
+                    <view wx:elif="{{item.type === 'img'}}">
+                        <image src="./image.svg"></image>
+                    </view>
+                </view>
+                <view class='bottom'>
+                    <view class='txt'>
+                        {{item.name}}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+</view>

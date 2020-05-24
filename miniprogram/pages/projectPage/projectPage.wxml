@@ -1,0 +1,44 @@
+<view class="container">
+
+    <view class="col">
+        <view class='item' bindtap="onOpenSupport">
+            <view class='icon'>
+                <image src="./open-support.svg"></image>
+            </view>
+            <view class='bottom'>
+                <view class='txt'>
+                    打开辅助文档
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="col">
+        <view class='item' bindtap="onNewMainDoc">
+            <view class='icon'>
+                <image src="./document-new.svg"></image>
+            </view>
+            <view class='bottom'>
+                <view class='txt'>
+                    新建主文档
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <block wx:for="{{docs}}" wx:key="name">
+        <view class="col">
+            <view class='item' data-file-index="{{index}}" bindtap="onViewMainDoc" bindlongpress="onDeleteMainDoc">
+                <view class='icon'>
+                    <image src="./text.svg"></image>
+                </view>
+                <view class='bottom'>
+                    <view class='txt'>
+                        {{item.name}}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+</view>
