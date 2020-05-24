@@ -43,10 +43,13 @@ class User {
         })
     }
 
-    syncProjects() {
-        return Promise.all(this.projects.map((p) => {
-            return p.sync()
-        }))
+    syncAll() {
+        return this.sync()
+        .then(() => {
+            return Promise.all(this.projects.map((p) => {
+                return p.syncAll()
+            }))
+        }) 
     }
 
     rename(name) {
@@ -70,6 +73,9 @@ class User {
         this._time = time
         p._time = time
         return Promise.all([this.sync(), p.sync()])
+        .then(() => {
+            return p 
+        })
     }
 
     deleteProject(id) {

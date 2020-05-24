@@ -61,15 +61,18 @@ class Project {
         })        
     }
 
-    syncDocuments() {
-        return Promise.all([
-            Promise.all(this.mainDocuments.map((d) => {
-                return d.sync()
-            })),
-            Promise.all(this.subDocuments.map((d) => {
-                return d.sync()
-            }))
-        ])
+    syncAll() {
+        return this.sync()
+        .then(() => {
+            return Promise.all([
+                Promise.all(this.mainDocuments.map((d) => {
+                    return d.sync()
+                })),
+                Promise.all(this.subDocuments.map((d) => {
+                    return d.sync()
+                }))
+            ])
+        })
     }
 
     findDocumentByID(id) {
@@ -92,7 +95,10 @@ class Project {
         const time = new Date().getTime()
         this._time = time
         d._time = time
-        return Promise.all(this.sync(), d.sync())
+        return Promise.all([this.sync(), d.sync()])
+        .then(() => {
+            return d
+        })
     }
 
     createSubDocument(name, type, path) {
@@ -110,6 +116,9 @@ class Project {
         d._time = time
         this.FSRoot = buildFS(this.subDocuments)
         return Promise.all(this.sync(), d.sync())
+        .then(() => {
+            return d
+        })
     }
 
     deleteDocument(id) {
