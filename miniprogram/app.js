@@ -14,5 +14,14 @@ App({
     //     traceUser: true,
     //   })
     // }
+    const taas = require('service/taas.js')
+    const User = require('service/user.js')
+    const credential = {
+      publicKey: "04ab0e5c13983507233a6b0775caf7b5814a8ce0129ea004498bc731bea9ff774f3d6ac3013f1522731be2be2ed0889dd22ef6dedbd8b70fc0b97fd087b13a9ed1",
+      privateKey: "61322afafd9e23f00af646b637344c14a0447c29cadb813d8f0e2774656d28df",
+      credential: "80fe572056f829dfaab3add6ade0921f3a092b8c"
+    }
+    taas.credential = credential
+    taas.initContract()
   }
 })

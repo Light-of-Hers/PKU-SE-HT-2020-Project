@@ -22,20 +22,17 @@ class User {
                 }
             })
         }
-        console.log(JSON.stringify(data))
         return taas.executeContract({
             method: 'syncUser',
             arg: JSON.stringify(data)
         })
-        .then((val) => {
-            console.log(val)
-            const res = JSON.parse(val.data)
+        .then((res) => {
             if(res.status != "Success") {
                 throw new Error('executeContract status: ' + res.status)
             }
-            const result = res.result
-            if(result.needLocalUpdate) {
-                const data = JSON.parse(result.data)
+            const result = JSON.parse(res.result)
+            if(result.needUpdateLocal) {
+                const data = result.data
                 this._time = data.time
                 this.name = data.name
                 this._nextid = data.nextid

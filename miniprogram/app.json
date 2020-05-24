@@ -5,7 +5,6 @@
     "pages/inputPage/inputPage",
     "pages/newDocPage/newDocPage",
     "pages/newFolderPage/newFolderPage",
-    "pages/uploadPage/uploadPage",
     "pages/viewPage/viewPage"
   ],
   "window": {

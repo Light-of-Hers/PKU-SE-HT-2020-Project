@@ -67,7 +67,10 @@ function getCredential(invitationCode, serverAddr, callback) {
     let cred = sm2.generateKeyPairHex();
     
     register(invitationCode, serverAddr, cred, (err, data) => {
-        if (err) callback(err);
+        if (err) {
+            callback(err);
+            return
+        }
         var r = {
             publicKey: cred.publicKey,
             privateKey: cred.privateKey,
@@ -283,28 +286,33 @@ function getContractList(serverAddr, credential, callback) {
  */
 function executeContract(contractInfo, serverAddr, credential, callback) {
     if (!serverAddr) serverAddr = getServerAddr();
-    var url = `${serverAddr}/contract/executeContract`;
-    var data = {
-        from: credential.publicKey,
-        accessToken: credential.credential,
+    const baseUrl = `http://47.97.168.61/contract/SCIDE/SCManager`;
+    var params = {
+        action: 'executeContract',
         contractID: contractInfo.id,
         operation: contractInfo.method,
-        arg: contractInfo.arg
+        arg: contractInfo.arg,
+        pubkey: credential.publicKey,
+        signature: signature(`${contractInfo.id}|${contractInfo.method}|${contractInfo.arg}|${credential.publicKey}`,
+                            credential) 
     };
-    
+
+    let url = baseUrl + '?'
+    let first = true
+    for(let key in params) {
+        if(!first) {
+            url += '&'
+        } 
+        url += `${key}=${params[key]}`
+        first = false
+    }
+    url = encodeURI(url)
+
     wx.request({
         url: url,
-        method: "POST",
-        data: data,
-        header: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
+        method: "GET",
         success: function(res) {
-            if (res.data.code !== 0){
-                callback(new Error(res.data.message));
-                return ;
-            }
-            callback(undefined, res.data.data);
+            callback(undefined, JSON.parse(res.data.data))
         },
         fail: function(res) {
             callback(new Error("network error"));
