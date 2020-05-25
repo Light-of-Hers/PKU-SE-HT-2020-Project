@@ -6,13 +6,13 @@
         <text> {{curtime}} </text>
       </view>
       <block wx:if = "{{doc.type == 'text'}}">
-        <view class = "text-container">
-          <text> {{curtext}} </text>
+        <view class = "text-container" bindlongpress = "deleteVersion">
+          <text> {{curcontent}} </text>
         </view>  
       </block>
       <block wx:elif = "{{doc.type == 'image'}}">
-        <view class = "image-container">
-          <image src = "{{curpath}}" mode = "aspectFill"/>
+        <view class = "image-container"  bindlongpress = "deleteVersion">
+          <image src = "{{curcontent}}" mode = "aspectFill"/>
         </view>
       </block> 
 
