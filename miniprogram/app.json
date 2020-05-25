@@ -4,7 +4,6 @@
     "pages/browsePage/browsePage",
     "pages/inputPage/inputPage",
     "pages/newDocPage/newDocPage",
-    "pages/uploadPage/uploadPage",
     "pages/viewPage/viewPage",
     "pages/UserPage/UserPage",
     "pages/projectManagePage/projectManagePage",

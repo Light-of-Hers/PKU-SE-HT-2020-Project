@@ -1,6 +1,5 @@
 const app = getApp();
 
-const identity = require('../../service/identity')
 const document = require('../../service/document')
 const filesys = require('../../service/filesys')
 const client = require('../../service/client')
