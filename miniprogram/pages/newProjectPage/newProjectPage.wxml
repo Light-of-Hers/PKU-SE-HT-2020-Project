@@ -1,0 +1,9 @@
+<view>
+	<view>
+		<input class = "input"
+				bindinput="bindProNameInput"
+				bindconfirm="newPro"
+				placeholder="新建作品名称" />
+		</view>
+	<button class = "btn" bindtap = "newPro"> 新建作品 </button>
+</view>

@@ -16,8 +16,8 @@ Page({
   onLoad: function() {
     client.loadLocal()
     .then(() => {
-      wx.redirectTo({
-        url: '../browsePage/browsePage',
+      wx.switchTab({
+        url: '../projectManagePage/projectManagePage',
       })
     })
     .catch((e) => {
@@ -46,9 +46,9 @@ Page({
     .then(() => {
       wx.showToast({title: "注册成功！"})
       console.log(client.getUser())
-      // wx.redirectTo({
-      //   url: '../browsePage/browsePage',
-      // })
+      wx.switchTab({
+        url: '../projectManagePage/projectManagePage',
+      })
     })
     .catch((e) => {
       wx.showToast({title: "注册失败：" + e.message, icon: "none"})

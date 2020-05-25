@@ -1,11 +1,16 @@
 {
   "pages": [
+    "pages/newFolderPage/newFolderPage",
     "pages/index/index",
     "pages/browsePage/browsePage",
     "pages/inputPage/inputPage",
     "pages/newDocPage/newDocPage",
-    "pages/newFolderPage/newFolderPage",
-    "pages/viewPage/viewPage"
+    "pages/uploadPage/uploadPage",
+    "pages/viewPage/viewPage",
+    "pages/UserPage/UserPage",
+    "pages/projectManagePage/projectManagePage",
+    "pages/newProjectPage/newProjectPage",
+    "pages/newMainDocPage/newMainDocPage"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -13,6 +18,19 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "我的创作家园",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/projectManagePage/projectManagePage",
+      "text": "家园",
+      "iconPath": "assets/home_1.png",
+      "selectedIconPath": "assets/home.png"
+    },{
+      "pagePath": "pages/UserPage/UserPage",
+      "text": "我的",
+      "iconPath": "assets/user_1.png",
+      "selectedIconPath": "assets/user.png"
+    }]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"

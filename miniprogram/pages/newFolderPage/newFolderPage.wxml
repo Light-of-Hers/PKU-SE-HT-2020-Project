@@ -1,6 +1,9 @@
 <view>
-	<text>输入新建文件夹名称</text>
-	<input bindinput="bindDirNameInput"/>
-	<button bindtap="newDir">新建
-	</button>
+	<view>
+		<input class = "input"
+				bindinput="bindDirNameInput"
+				bindconfirm="newDir"
+				placeholder="新建文件夹名称" />
+		</view>
+	<button class = "btn" bindtap = "newDir"> 新建文件夹 </button>
 </view>

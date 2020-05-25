@@ -3,7 +3,7 @@
 		<input class = "input"
 			bindinput="bindDocNameInput"
 			bindconfirm="newDoc"
-			placeholder="新建文件名" />
+			placeholder="新建主文件名" />
 		</view>
 	<view class = "btn-wrap">
       <button class = "btn" bindtap = "taptext"> 上传文字 </button>

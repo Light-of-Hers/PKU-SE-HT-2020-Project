@@ -7,23 +7,23 @@ const client = require('../../service/client')
 const project = require('../../service/project')
 
 Page({
-  data:{
+  data: {
     pro: null,
-    cwd: null,
-    docf: null,
     docname: '',
     type: true,
     input: ''
   },
 
-  onLoad:function(){
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
     const self = this;
     self.setData({
-      cwd: app.globalData.tmp_arg.cwd,
-      pro: app.globalData.tmp_arg.project
+      pro: app.globalData.tmp_arg
     })
   },
-
+  
   bindDocNameInput: function(e){
     const self = this;
     self.data.docname = e.detail.value;
@@ -63,29 +63,27 @@ Page({
       type: false
     });
   },
-
+  
   newDoc: function(){
     const self = this;
-    var typ, suffix;
+    var typ;
     self.data.type? typ = "text":typ = "path";
-    self.data.type? suffix = ".txt":suffix = ".png";//不确定图片后缀应该写什么
-    self.data.pro.createSubDocument(self.data.docname, typ, self.data.cwd.getPath()+"/"+self.data.docname + suffix)
+    self.data.pro.createMainDocument(self.data.docname, typ)
     .then((newDocument)=>{
       newDocument.createVersion({typ : self.data.input})//迷茫
       .then(()=>{
-        wx.showToast({title: "新建文件成功！", time: 2000});
+        wx.showToast({title: "新建主文件成功！", time: 2000});
       })
       .catch((e) =>{
-        wx.showToast({title: "新建文件失败!", time: 2000});
+        wx.showToast({title: "新建主文件失败!", time: 2000});
       })
-      self.data.docf = new filesys.DocFile(self.data.docname, newDocument, self.data.cwd);
-      self.data.cwd.addChild(self.data.doc);
       wx.navigateBack({//返回
         delta: 1
       });
     })
     .catch((e) =>{
-      wx.showToast({title: "新建文件失败!", time: 2000})
+      wx.showToast({title: "新建主文件失败!", time: 2000})
     })
   }
+
 })
