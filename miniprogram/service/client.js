@@ -62,6 +62,9 @@ module.exports = {
             this.user = new User('', credential)
             return this.user.syncAll()
         })
+        .then(() => {
+            this.storeCloud(credential)
+        })
     },
 
     register(invitationCode, name) {
@@ -79,6 +82,7 @@ module.exports = {
         .then(() => {
             this.user = user
             wx.setStorageSync('credential', credential)
+            this.storeCloud(taas.credential)
         })
     },
     

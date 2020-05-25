@@ -2,7 +2,6 @@
 
 const app = getApp()
 
-const identity = require('../../service/identity')
 const document = require('../../service/document')
 const client = require('../../service/client')
 const user = require('../../service/user')

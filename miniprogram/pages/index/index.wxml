@@ -19,16 +19,21 @@
             bindconfirm="login"
             confirm-type="done" 
             placeholder="PrivateKey" />
-        <button class = "login-btn" bindtap="login">导入</button>
+        <button class = "login-btn" bindtap="login">登录</button>
+        <button class = "login-btn-wechat" bindtap="cloudLogin">使用微信登录</button>
     </view>
 
     <view class = "register">
         <!-- <text>通过邀请码注册</text> -->
         <input class = "input"
             bindinput="bindInvitationCodeInput" 
+            confirm-type="next" 
+            placeholder="请输入邀请码" />
+        <input class = "input"
+            bindinput="bindNameInput" 
             bindconfirm="register"
             confirm-type="done" 
-            placeholder="请输入邀请码" />
+            placeholder="请输入昵称" />
         <button class = "register-btn" bindtap="register">注册</button>
     </view>
 </view>

@@ -19,6 +19,13 @@
   color: #f0f1f3;
 }
 
+.login-btn-wechat {
+  margin-top: 4px;
+  border-radius: 98rpx;
+  background-color: #09bb07;
+  color: #f0f1f3;
+}
+
 .register-btn {
   border-radius: 98rpx;
   background-color: rgb(5, 21, 78);
