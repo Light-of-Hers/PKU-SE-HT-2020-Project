@@ -54,6 +54,7 @@ class User {
 
     rename(name) {
         this.name = name
+        this._time = new Date().getTime()
         return this.sync()
     }
 
