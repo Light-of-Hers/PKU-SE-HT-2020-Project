@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/newFolderPage/newFolderPage",
     "pages/index/index",
     "pages/browsePage/browsePage",
     "pages/inputPage/inputPage",
@@ -9,6 +8,7 @@
     "pages/viewPage/viewPage",
     "pages/UserPage/UserPage",
     "pages/projectManagePage/projectManagePage",
+    "pages/newFolderPage/newFolderPage",
     "pages/newProjectPage/newProjectPage",
     "pages/newMainDocPage/newMainDocPage"
   ],
