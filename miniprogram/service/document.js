@@ -106,7 +106,7 @@ class Document {
 
     deleteVersion(index) {
         this.versions.splice(index, 1)
-        this._time = new Data().getTime()
+        this._time = new Date().getTime()
         this.sync()
     }
 }
