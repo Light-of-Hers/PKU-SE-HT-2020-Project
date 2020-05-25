@@ -15,7 +15,43 @@ module.exports = {
     },
 
     loadCloud() {
-        return Promise.reject('not implement')
+        return wx.cloud.callFunction({
+            name: 'getOpenid'
+          })
+          .then((res) => {
+            const openid = res.result
+            const db = wx.cloud.database({
+                env: 'homeforcreator-8sqew'
+            })
+            return db.collection('credential').doc(openid).get()
+          })
+          .then((res) => {
+              const credential = res.data.credential
+              return this.login(credential)
+          })
+          .catch((e) => {
+              if(e.errCode == -1)
+                return Promise.reject('Credential not found in cloud')
+              throw e
+          })
+    },
+
+    storeCloud(credential) {
+        return wx.cloud.callFunction({
+            name: 'getOpenid'
+          })
+          .then((res) => {
+            const openid = res.result
+            const db = wx.cloud.database({
+                env: 'homeforcreator-8sqew'
+            })
+            return db.collection('credential').doc(openid)
+            .set({
+                data: {
+                    credential: credential
+                }
+            })
+          })
     },
 
     login(credential) {
