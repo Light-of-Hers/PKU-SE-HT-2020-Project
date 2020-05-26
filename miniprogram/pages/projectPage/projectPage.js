@@ -22,9 +22,8 @@ Page({
     },
     render: function () {
         const self = this;
-        self.data.docs = self.data.project.mainDocuments;
         self.setData({
-            docs: self.data.docs
+            docs: self.data.project.mainDocuments
         });
     },
     onOpenSupport: function () {

@@ -15,7 +15,7 @@ Page({
       this.setData({
         user: client.getUser()
       })
-      },
+    },
     onShow: function () {
         this.render();
     },
