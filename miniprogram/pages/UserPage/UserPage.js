@@ -56,7 +56,7 @@ Page({
 
   rename: function(e){
     const self = this;
-    client.getUser().rename(Myname)
+    client.getUser().rename(self.data.Myname)
     .then(() => {
       wx.showToast({title: "昵称修改成功！", time: 2000})
       //重新渲染页面?

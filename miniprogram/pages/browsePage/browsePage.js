@@ -57,7 +57,7 @@ Page({
         const self = this;
         if (file instanceof fs.DocFile) {
             console.log(`click DocFile: ${file.name}`);
-            app.globalData.tmp_arg = file;
+            app.globalData.tmp_arg = file.doc;
             wx.navigateTo({
                 url: '../viewPage/viewPage',
             });

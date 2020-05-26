@@ -68,9 +68,12 @@ Page({
     var typ, suffix;
     self.data.type? typ = "text":typ = "path";
     self.data.type? suffix = ".txt":suffix = ".png";//不确定图片后缀应该写什么
-    self.data.pro.createSubDocument(self.data.docname, typ, self.data.cwd.getPath()+self.data.docname + suffix)
+    self.data.docname += suffix
+    self.data.pro.createSubDocument(self.data.docname, typ === "text" ? "text" : "image", self.data.cwd.getPath()+self.data.docname)
     .then((newDocument)=>{
-      newDocument.createVersion({typ : self.data.input})//迷茫
+      let content = {};
+      content[typ] = self.data.input;
+      newDocument.createVersion(content)//迷茫
       .then(()=>{
         wx.showToast({title: "新建文件成功！", time: 2000});
       })

@@ -67,9 +67,11 @@ Page({
     const self = this;
     var typ;
     self.data.type? typ = "text":typ = "path";
-    self.data.pro.createMainDocument(self.data.docname, typ)
+    self.data.pro.createMainDocument(self.data.docname, typ === "text" ? "text" : "image")
     .then((newDocument)=>{
-      newDocument.createVersion({typ : self.data.input})//迷茫
+      let content = {};
+      content[typ] = self.data.input;
+      newDocument.createVersion(content)//迷茫
       .then(()=>{
         wx.showToast({title: "新建主文件成功！", time: 2000});
       })
