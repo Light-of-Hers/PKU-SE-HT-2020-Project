@@ -22,7 +22,10 @@ class Version {
                 if(data.data.data) {
                     let path = `${wx.env.USER_DATA_PATH}/temp/${this.hashId}`
                     const fsm = wx.getFileSystemManager()
-                    fsm.mkdirSync(`${wx.env.USER_DATA_PATH}/temp/`, true)
+                    try {
+                        fsm.mkdirSync(`${wx.env.USER_DATA_PATH}/temp/`, true)
+                    }
+                    catch (e) {console.log(e)}
                     fsm.writeFileSync(path, data.data.data, 'base64')
                     this._content = {
                         path: path
