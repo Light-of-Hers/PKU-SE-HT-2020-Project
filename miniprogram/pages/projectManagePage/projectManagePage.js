@@ -55,7 +55,7 @@ Page({
         content: `确认删除作品"${project.name}"？`,
         success (res) {
           if (res.confirm) {
-            self.data.user.deleteProject(idx);
+            self.data.user.deleteProject(project.id);
             self.render();
           }
         }
