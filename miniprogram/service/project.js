@@ -91,6 +91,7 @@ class Project {
             type: type,
             isMain: true
         })
+        this._nextid++
         this.mainDocuments.push(d)
         const time = new Date().getTime()
         this._time = time
@@ -110,6 +111,7 @@ class Project {
             path: path,
             isMain: false
         })
+        this._nextid++
         this.subDocuments.push(d)
         const time = new Date().getTime()
         this._time = time
