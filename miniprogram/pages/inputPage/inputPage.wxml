@@ -15,7 +15,7 @@
   <block wx:elif = "{{doc.type == 'image'}}">
     <button class = "btn" bindtap = "getImg"> 上传图片 </button>
       <view class = "image-container">
-        <image src = "{{imgpath}}" mode = "aspectFill" hidden = "{{imgpath == ''}}"/>
+        <image src = "{{imgpath}}" mode = "widthFix" hidden = "{{imgpath == ''}}" bindtap = "clickImg"/>
       </view>
     <button class = "btn" bindtap = "updateImg"> 确认 </button>
   </block>

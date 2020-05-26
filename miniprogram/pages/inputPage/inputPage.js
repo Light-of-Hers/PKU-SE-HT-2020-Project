@@ -98,5 +98,12 @@ Page({
         }
       })
     })
+  },
+
+  clickImg: function(e) {
+    const self = this;
+    wx.previewImage({
+      urls: [self.data.imgpath]
+    })
   }
 })
