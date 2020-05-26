@@ -28,6 +28,7 @@ class User {
         })
         .then((res) => {
             if(res.status != "Success") {
+                console.log(res)
                 throw new Error('executeContract status: ' + res.status)
             }
             const result = JSON.parse(res.result)

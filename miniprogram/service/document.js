@@ -16,11 +16,19 @@ class Version {
             .then((data) => {
                 if(data.data.text) {
                     this._content = data.data.text
-                    this._cached = data.data.text
-                    return data.data.text
+                    this._cached = true
+                    return this._content
                 }
                 if(data.data.data) {
-                    return Promise.reject('Not implement')
+                    let path = `${wx.env.USER_DATA_PATH}/temp/${this.hashId}`
+                    const fsm = wx.getFileSystemManager()
+                    fsm.mkdirSync(`${wx.env.USER_DATA_PATH}/temp/`, true)
+                    fsm.writeFileSync(path, data.data.data, 'base64')
+                    this._content = {
+                        path: path
+                    }
+                    this._cached = true
+                    return this._content
                 }
                 throw new error('No data')
             })

@@ -63,6 +63,12 @@ module.exports = {
             return this.user.syncAll()
         })
         .then(() => {
+            return wx.getFileSystemManager().rmdir({
+                dirPath: `${wx.env.USER_DATA_PATH}/temp/`,
+                recursive: true
+            })
+        })
+        .then(() => {
             this.storeCloud(credential)
         })
     },
