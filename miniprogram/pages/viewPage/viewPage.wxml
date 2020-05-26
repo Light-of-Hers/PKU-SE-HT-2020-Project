@@ -12,7 +12,7 @@
       </block>
       <block wx:elif = "{{doc.type == 'image'}}">
         <view class = "image-container"  bindlongpress = "deleteVersion">
-          <image src = "{{curcontent}}" mode = "aspectFill"/>
+          <image src = "{{curcontent}}" mode = "widthFix" bindtap = "clickImg"/>
         </view>
       </block> 
 

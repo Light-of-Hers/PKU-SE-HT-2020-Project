@@ -8,7 +8,8 @@ Page({
     curIndex: 0,
     curtime: null,
     curcontent: null,
-    loading: true
+    loading: true,
+    needRender: true
   },
   onLoad: function() {
     this.setData({
@@ -20,7 +21,12 @@ Page({
   },
 
   onShow: function() {
-    this.render(0);
+    if (this.data.needRender) {
+      this.setData({
+        needRender: false
+      });
+      this.render(0);
+    }
   },
 
   render: function(idx) {
@@ -72,6 +78,9 @@ Page({
   },
 
   updateFile: function() {
+    this.setData({
+      needRender: true
+    })
     wx.navigateTo({
       url: '../inputPage/inputPage',
     });
@@ -84,6 +93,7 @@ Page({
     });
     
     self.data.doc.versions[tempIndex].getContent().then(function(res) {
+      console.log(res);
       self.setData({
         curIndex: tempIndex,
         curtime: time.formatDate(self.data.doc.versions[tempIndex].timestamp),
@@ -114,6 +124,13 @@ Page({
           self.render(idx);
         }
       }
+    })
+  },
+
+  clickImg: function(e) {
+    const self = this;
+    wx.previewImage({
+      urls: [self.data.curcontent]
     })
   }
 })
