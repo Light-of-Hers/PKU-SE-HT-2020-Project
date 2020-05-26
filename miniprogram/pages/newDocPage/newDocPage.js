@@ -68,7 +68,7 @@ Page({
     var typ, suffix;
     self.data.type? typ = "text":typ = "path";
     self.data.type? suffix = ".txt":suffix = ".png";//不确定图片后缀应该写什么
-    self.data.pro.createSubDocument(self.data.docname, typ, self.data.cwd.getPath()+"/"+self.data.docname + suffix)
+    self.data.pro.createSubDocument(self.data.docname, typ, self.data.cwd.getPath()+self.data.docname + suffix)
     .then((newDocument)=>{
       newDocument.createVersion({typ : self.data.input})//迷茫
       .then(()=>{
@@ -78,12 +78,13 @@ Page({
         wx.showToast({title: "新建文件失败!", time: 2000});
       })
       self.data.docf = new filesys.DocFile(self.data.docname, newDocument, self.data.cwd);
-      self.data.cwd.addChild(self.data.doc);
+      self.data.cwd.addChild(self.data.docf);
       wx.navigateBack({//返回
         delta: 1
       });
     })
     .catch((e) =>{
+      console.log(e);
       wx.showToast({title: "新建文件失败!", time: 2000})
     })
   }

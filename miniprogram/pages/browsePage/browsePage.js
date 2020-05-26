@@ -11,10 +11,11 @@ Page({
     },
     onLoad: function () {
         const self = this; // 静态绑定this，仅个人习惯
-        self.project = app.globalData.tmp_arg;
-        if (!self.project.FSRoot)
-            self.project.FSRoot = fs.buildFS(self.project.subDocuments);
-        const dir = self.project.FSRoot;
+        const project = app.globalData.tmp_arg;
+        if (!project.FSRoot)
+            project.FSRoot = fs.buildFS(project.subDocuments);
+        const dir = project.FSRoot;
+        self.data.project = project;
         self.changeDir(dir);
     },
     onShow: function () {
@@ -74,7 +75,7 @@ Page({
     onNewDoc: function () {
         const self = this;
         self.data.needRerender = true;
-        app.globalData.tmp_arg = self.data.cwd;
+        app.globalData.tmp_arg = { cwd: self.data.cwd, project: self.data.project };
         wx.navigateTo({
             url: '../newDocPage/newDocPage',
         });
@@ -82,19 +83,23 @@ Page({
     onNewFolder: function () {
         const self = this;
         self.data.needRerender = true;
-        app.globalData.tmp_arg = self.data.cwd;
+        app.globalData.tmp_arg = { cwd: self.data.cwd, project: self.data.project };
         wx.navigateTo({
             url: '../newFolderPage/newFolderPage',
         });
     },
     deleteFile: function (file) {
         const self = this;
-        if (file instanceof fs.DocFile) {
-            self.data.project.deleteDocument(file.getId());
-        } else if (file instanceof fs.DirFile) {
-            file.children.forEach((_, chld) => self.deleteFile(chlid));
-            self.data.project.deleteDocument(file.getId());
-        }
+        const dfs = (file) => {
+            if (file instanceof fs.DocFile) {
+                self.data.project.deleteDocument(file.getId());
+            } else if (file instanceof fs.DirFile) {
+                file.children.forEach((_, chld) => dfs(chld));
+                self.data.project.deleteDocument(file.getId());
+            }
+        };
+        dfs(file);
+        self.data.cwd.removeChild(file);
     },
     onDeleteFile: function (event) {
         const self = this;
@@ -103,7 +108,7 @@ Page({
         if (file) {
             wx.showModal({
                 title: "提示",
-                content: `确定要删除${file instanceof fs.DirFile ? "文件夹" : "文件"}"${doc.name}"吗？`,
+                content: `确定要删除${file instanceof fs.DirFile ? "文件夹" : "文件"}"${file.name}"吗？`,
                 success: res => {
                     if (res.confirm) {
                         self.deleteFile(file);

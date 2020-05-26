@@ -115,7 +115,7 @@ class Project {
         this._time = time
         d._time = time
         this.FSRoot = buildFS(this.subDocuments)
-        return Promise.all(this.sync(), d.sync())
+        return Promise.all([this.sync(), d.sync()])
         .then(() => {
             return d
         })
@@ -129,7 +129,7 @@ class Project {
                 return this.sync()
             }
         }
-        for(let i in thie.subDocuments) {
+        for(let i in this.subDocuments) {
             if(this.subDocuments[i].id == id) {
                 this.subDocuments.splice(i, 1)
                 this._time = new Date().getTime()

@@ -28,7 +28,7 @@ Page({
 
   newDir: function(){
     const self = this;
-    self.data.pro.createSubDocument(self.data.dirname, "text", self.data.cwd.getPath()+"/"+self.data.dirname+"/")
+    self.data.pro.createSubDocument(self.data.dirname, "text", self.data.cwd.getPath()+self.data.dirname+"/")
     .then((newDir)=>{
       wx.showToast({title: "新建文件夹成功！", time:2000});
       self.data.dir = new filesys.DirFile(self.data.dirname, newDir.id, self.data.cwd);
@@ -38,6 +38,7 @@ Page({
       });
     })
     .catch((e) =>{
+      console.log(e);
       wx.showToast({title: "新建文件失败!", time:2000})
     })
   }

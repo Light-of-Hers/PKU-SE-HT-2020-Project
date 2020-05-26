@@ -48,7 +48,7 @@ Page({
         const doc = self.data.docs[idx];
         app.globalData.tmp_arg = doc;
         wx.navigateTo({
-            url: '../viewDoc/viewDoc',
+            url: '../viewPage/viewPage',
         })
     },
     onDeleteMainDoc: function (event) {
