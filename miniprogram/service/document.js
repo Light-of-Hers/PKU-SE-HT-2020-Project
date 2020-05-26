@@ -15,7 +15,9 @@ class Version {
             return taas.queryEvidence(this.hashId)
             .then((data) => {
                 if(data.data.text) {
-                    this._content = data.data.text
+                    this._content = {
+                        text: data.data.text
+                    }
                     this._cached = true
                     return this._content
                 }
