@@ -1,37 +1,55 @@
 <view>
   <loading hidden = "{{!loading}}"> 加载中... </loading>
   <view hidden = "{{loading}}">
-    <block wx:if = "{{doc.versions.length}}">
-      <view class = "time-stamp">
-        <text> {{curtime}} </text>
-      </view>
-      <block wx:if = "{{doc.type == 'text'}}">
-        <view class = "text-container" bindlongpress = "deleteVersion">
-          <text> {{curcontent}} </text>
-        </view>  
-      </block>
-      <block wx:elif = "{{doc.type == 'image'}}">
-        <view class = "image-container"  bindlongpress = "deleteVersion">
-          <image src = "{{curcontent}}" mode = "widthFix" bindtap = "clickImg"/>
+    <view class = "container">
+      <block wx:if = "{{doc.versions.length}}">
+        <view class = "time-stamp">
+          <text> {{curtime}} </text>
         </view>
-      </block> 
-
-      <view class = "btn">
-        <button class = "new-btn" bindtap = "newVersion"> 新版本 </button>
-        <button class = "new-btn" bindtap = "oldVersion"> 老版本 </button>
+        <block wx:if = "{{doc.type == 'text'}}">
+          <view class = "text-container">
+            <text> {{curcontent}} </text>
+          </view>  
+        </block>
+        <block wx:elif = "{{doc.type == 'image'}}">
+          <view class = "image-container">
+            <image src = "{{curcontent}}" mode = "widthFix" bindtap = "clickImg"/>
+          </view>
+        </block> 
+        
+        <view class = "under">
+          <text> 获取时间：{{downloadTime}} </text>
+          <image src = "delete.png" bindtap= "deleteVersion"/>
+        </view>
+      </block>
+      <block wx:else>
+        <view class = "no-version">
+          <image src = "no-version.png" mode = "aspectFit"/>
+          <text> 还没有开始哦~ </text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class = "footer">
+    <block wx:if = "{{history == null}}">
+      <view class = "edit" hover-class = "edit-hover" bindtap = "updateFile">
+        <image src = "edit.png"/>
+        <text> 重新编辑 </text>
+      </view>
+      <view class = 'edit' hover-class = "edit-hover" bindtap = "viewHistory">
+        <image src = "footprint.png"/>
+        <text> 创作足迹 </text>
       </view>
     </block>
     <block wx:else>
-      <view class = "no-version">
-        <image src = "no-version.png" style = "height: 200rpx; width: 200rpx;" mode = "aspectFit"/>
+      <view class = "edit" hover-class = "edit-hover" bindtap = "newVersion">
+        <image src = "left.png"/>
+        <text> 新版本 </text>
       </view>
-      <view class = "no-version">
-        <text> 还没有开始哦~ </text>
+      <view class = 'edit' hover-class = "edit-hover" bindtap = "oldVersion">
+        <text> 老版本 </text>
+        <image src = "right.png" style = "margin-left: 20rpx; margin-right: 0rpx;"/>
       </view>
     </block>
-    <view class = "update-module">
-      <button style = "width:100%;"
-              bindtap = "updateFile"> 更新文件 </button>
-    </view>
   </view>
 </view>

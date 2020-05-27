@@ -1,6 +1,6 @@
 const Document = require('../../service/document');
 const app = getApp();
-const time = require('util')
+const time = require("../../utils/util")
 
 Page({
   data: {
@@ -9,11 +9,14 @@ Page({
     curtime: null,
     curcontent: null,
     loading: true,
-    needRender: true
+    needRender: true,
+    history: null,
+    downloadtime: null
   },
-  onLoad: function() {
+  onLoad: function(options) {
     this.setData({
-      doc: app.globalData.tmp_arg
+      doc: app.globalData.tmp_arg,
+      history: (options.version_id != undefined)? options.version_id: null
     });
     wx.setNavigationBarTitle({
       title: this.data.doc.name
@@ -25,7 +28,12 @@ Page({
       this.setData({
         needRender: false
       });
-      this.render(0);
+      if (!this.data.history) {
+        this.render(0);
+      }
+      else {
+        this.render(this.data.history);
+      }
     }
   },
 
@@ -98,7 +106,8 @@ Page({
         curIndex: tempIndex,
         curtime: time.formatDate(self.data.doc.versions[tempIndex].timestamp),
         curcontent: self.data.doc.type == 'text'? res.text: res.path,
-        loading: false
+        loading: false,
+        downloadtime: time.formatDate(new Date().toString())
       })
     }) .catch((e) => {
       console.error(e);
@@ -132,5 +141,15 @@ Page({
     wx.previewImage({
       urls: [self.data.curcontent]
     })
+  },
+
+  viewHistory: function() {
+    wx.navigateTo({
+      url: '../versionPage/versionPage',
+    });
+  },
+
+  returnHistory: function() {
+    wx.navigateBack({});
   }
 })

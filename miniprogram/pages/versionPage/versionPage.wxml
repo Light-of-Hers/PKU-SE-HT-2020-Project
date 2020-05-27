@@ -1,0 +1,24 @@
+<view class="container">
+    <block wx:if = "{{versions.length == 0}}">
+        <view class = "no-version-note">
+            <image src = "./no-version.png"/>
+            <text> 此地无痕~ </text>
+        </view>
+    </block>
+    <block wx:else>
+        <block wx:for="{{versions}}" wx:key = "timestamp">
+            <view class='item' data-file-index="{{index}}" bindtap="onViewVersion">
+                <image src="./right.png" style = "margin-left: 20rpx;margin-right: 30rpx;" wx:if = "{{index % 2 == 1}}"/>
+                <image src = "./left.png" wx:if = "{{index % 2 == 0}}"/>
+                <view class = "text-container">
+                    <view class='txt'>
+                        {{formatTime[index]}}
+                    </view>
+                    <view class= 'hashId-txt'>
+                        hashId: {{item.hashId}}
+                    </view>
+                </view>
+            </view>
+        </block>
+    </block>
+</view>

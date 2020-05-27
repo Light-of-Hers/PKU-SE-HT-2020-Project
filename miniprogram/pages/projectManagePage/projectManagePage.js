@@ -2,7 +2,7 @@ const fs = require("../../service/filesys");
 const document = require("../../service/document")
 const client = require("../../service/client")
 const Project = require("../../service/project")
-const time = require("./util")
+const time = require("../../utils/util")
 const app = getApp();
 
 Page({

@@ -1,13 +1,12 @@
+.container {
+  margin-bottom: 90rpx;
+}
+
 .text-container {
-  height: 60vh;
   margin: 20rpx;
   padding: 30rpx;
-  border: 1rpx solid #e0e0e0;
-  border-radius: 10rpx;
-  box-shadow: 0 0 5rpx #e0e0e0;
   line-height: 50rpx;
   overflow-wrap: break-word;
-  overflow: scroll;
 }
 
 .image-container {
@@ -20,31 +19,67 @@
 }
 
 .time-stamp {
-  margin: 20rpx;
-  border: 1rpx solid #e0e0e0;
-  border-radius: 10rpx;
-  background-color: #e0e0e0;
+  padding: 20rpx;
+  border-bottom: 1px solid #e0e0e0;
+  /*background-color: #e0e0e0;*/
   text-align: center;
 }
 
-.btn {
-  margin: 20rpx;
+.under {
+  padding: 20rpx;
+  border-top:1px solid #e0e0e0;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  text-align: left;
 }
 
-.new-btn {
-  border-radius: 98rpx;
-  background: bg_blue;
-  color: #042f6b;
+.under image{
+  width: 40rpx;
+  height: 40rpx;
+  opacity: 0.5;
 }
-
+.under text{
+  flex: 1;
+  font-size: 40rpx;
+  color: #e0e0e0;
+}
 .no-version {
-  text-align: center;
+  height: 1000rpx;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.update-module {
-  border-top: 1rpx solid #e0e0e0;
-  margin-top: 50rpx;
-  padding-top: 20rpx;
+.no-version image{
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  height: 90rpx;
+  bottom: 0;
+  display: flex;
+}
+
+.footer image {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+
+.edit {
+  padding: 20rpx;
+  flex: 1;
+  display: flex;
+  border-radius: 50rpx;
+  background-color: #c2ced9;
+  justify-content: center;
+  color: rgb(71, 69, 69);
+}
+
+.edit-hover {
+  background-color: rgb(129, 137, 150);
 }
