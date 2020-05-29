@@ -101,20 +101,23 @@ Page({
         dfs(file);
         self.data.cwd.removeChild(file);
     },
-    onDeleteFile: function (event) {
+    onManipulateFile: function (event) {
         const self = this;
         const idx = event.currentTarget.dataset.fileIndex;
         const file = self.data.files[idx].file;
         if (file) {
-            wx.showModal({
-                title: "提示",
-                content: `确定要删除${file instanceof fs.DirFile ? "文件夹" : "文件"}"${file.name}"吗？`,
+            wx.showActionSheet({
+                itemList: ['删除', '重命名'],
                 success: res => {
-                    if (res.confirm) {
+                    if (res.tapIndex == 0) {
                         self.deleteFile(file);
                         self.render();
-                    } else if (res.cancel) {
-                        return false;
+                    } else {
+                        self.data.needRerender = true;
+                        app.globalData.tmp_arg = file;
+                        wx.navigateTo({
+                            url: '../renamePage/renamePage',
+                        });
                     }
                 }
             });

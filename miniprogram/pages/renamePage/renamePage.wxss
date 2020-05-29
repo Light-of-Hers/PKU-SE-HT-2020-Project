@@ -1,0 +1,15 @@
+.btn {
+    border-radius: 98rpx;
+    background: bg_blue;
+    color: #042f6b;
+}
+
+.input {
+    width: 90%;
+    height: 80rpx;
+    margin: 0 auto;
+    padding-left: 30rpx;
+    border: 1px solid #ccc;
+    border-radius: 50rpx;
+    margin: 20rpx;
+}

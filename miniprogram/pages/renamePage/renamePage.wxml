@@ -1,0 +1,6 @@
+<view>
+    <view>
+        <input class="input" bindinput="bindNewName" bindconfirm="onRename" placeholder="新名称" />
+    </view>
+    <button class="btn" bindtap="onRename"> 重命名 </button>
+</view>

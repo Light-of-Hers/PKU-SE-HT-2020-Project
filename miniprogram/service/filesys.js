@@ -1,25 +1,23 @@
 class BaseFile {
     name = ""
     parent = null
-    id = -1
+    doc = null
 
-    constructor(name, id, parent = null) {
+    constructor(name, doc, parent = null) {
         this.name = name;
         this.parent = parent;
-        this.id = id;
+        this.doc = doc;
     }
     setParent(p) { this.parent = p; }
     getPath() { throw "Not implemented"; }
     toString() { throw "Not implemented"; }
-    getId() { return this.id; }
+    getId() { return this.doc.id; }
 }
 
 class DocFile extends BaseFile {
-    doc = null
 
-    constructor(name, doc, parent = null) {
-        super(name, doc.id, parent);
-        this.doc = doc;
+    constructor(name, doc = null, parent = null) {
+        super(name, doc, parent);
     }
     getPath() {
         let res = this.name;
@@ -43,8 +41,8 @@ class DocFile extends BaseFile {
 class DirFile extends BaseFile {
     children = new Map();
 
-    constructor(name, id = -1, parent = null) {
-        super(name, id, parent);
+    constructor(name, doc, parent = null) {
+        super(name, doc, parent);
         this.children.set("..", this.parent);
     }
     getPath() {
@@ -102,15 +100,16 @@ function buildFS(docs) {
         }
         const chld = cur_dir.getChild(fname);
         if (chld === undefined) {
-            cur_dir.addChild(path.endsWith("/") ? new DirFile(fname, doc.id) : new DocFile(fname, doc));
+            cur_dir.addChild(path.endsWith("/") ? new DirFile(fname, doc) : new DocFile(fname, doc));
         } else if (chld instanceof DirFile) {
-            chld.id = doc.id;
+            chld.doc = doc;
         }
     }
     return fs;
 }
 
 module.exports = {
+    BaseFile,
     DocFile,
     DirFile,
     buildFS,

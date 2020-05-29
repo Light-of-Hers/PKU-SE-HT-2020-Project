@@ -31,7 +31,7 @@ Page({
     self.data.pro.createSubDocument(self.data.dirname, "text", self.data.cwd.getPath()+self.data.dirname+"/")
     .then((newDir)=>{
       wx.showToast({title: "新建文件夹成功！", time:2000});
-      self.data.dir = new filesys.DirFile(self.data.dirname, newDir.id, self.data.cwd);
+      self.data.dir = new filesys.DirFile(self.data.dirname, newDir, self.data.cwd);
       self.data.cwd.addChild(self.data.dir);
       wx.navigateBack({//返回
         delta: 1

@@ -14,7 +14,7 @@
     </view>
 
     <block wx:for="{{docs}}" wx:key="name">
-        <view class='item' data-file-index="{{index}}" bindtap="onViewMainDoc" bindlongpress="onDeleteMainDoc">
+        <view class='item' data-file-index="{{index}}" bindtap="onViewMainDoc" bindlongpress="onManipulateMainDoc">
             <view wx:if="{{item.type === 'text'}}">
                 <image src="./text.svg"></image>
             </view>

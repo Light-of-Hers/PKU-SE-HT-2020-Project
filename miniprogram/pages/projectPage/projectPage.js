@@ -50,21 +50,24 @@ Page({
             url: '../viewPage/viewPage',
         })
     },
-    onDeleteMainDoc: function (event) {
+    onManipulateMainDoc: function (event) {
         const self = this;
         const idx = event.currentTarget.dataset.fileIndex;
         const doc = self.data.docs[idx];
-        wx.showModal({
-            title: "提示",
-            content: `确定要删除主文档"${doc.name}"吗？`,
+        wx.showActionSheet({
+            itemList: ['删除', '重命名'],
             success: res => {
-                if (res.confirm) {
+                if (res.tapIndex == 0) {
                     self.data.project.deleteDocument(doc.id);
                     self.render();
-                } else if (res.cancel) {
-                    return false;
+                } else {
+                    self.data.needRerender = true;
+                    app.globalData.tmp_arg = doc;
+                    wx.navigateTo({
+                        url: '../renamePage/renamePage',
+                    });
                 }
             }
-        })
+        });
     }
 })

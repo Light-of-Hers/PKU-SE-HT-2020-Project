@@ -28,7 +28,7 @@
 
     <block wx:for="{{files}}" wx:key="name">
         <view class="col">
-            <view class='item' data-file-index="{{index}}" bindtap="onViewFile" bindlongpress="onDeleteFile">
+            <view class='item' data-file-index="{{index}}" bindtap="onViewFile" bindlongpress="onManipulateFile">
                 <view class='icon'>
                     <view wx:if="{{item.type === 'dir'}}">
                         <image src="./folder.svg"></image>
