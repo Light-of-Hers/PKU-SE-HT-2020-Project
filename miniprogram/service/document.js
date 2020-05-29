@@ -122,6 +122,12 @@ class Document {
         this._time = new Date().getTime()
         this.sync()
     }
+
+    rename(name, path = "") {
+        this.name = name
+        this.path = path
+        // TODO
+    }
 }
 
-module.exports = Document
+module.exports = {Document}

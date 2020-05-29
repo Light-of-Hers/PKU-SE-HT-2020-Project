@@ -8,7 +8,7 @@ class Project {
         this.name = name
         this.mainDocuments = []
         this.subDocuments = []
-        this.FSRoot = buildFS(this.subDocuments)
+        this.FSRoot = null
         this._time = 0
         this._nextid = 0
     }
@@ -116,7 +116,7 @@ class Project {
         const time = new Date().getTime()
         this._time = time
         d._time = time
-        this.FSRoot = buildFS(this.subDocuments)
+        // this.FSRoot = buildFS(this.subDocuments)
         return Promise.all([this.sync(), d.sync()])
         .then(() => {
             return d
@@ -135,7 +135,7 @@ class Project {
             if(this.subDocuments[i].id == id) {
                 this.subDocuments.splice(i, 1)
                 this._time = new Date().getTime()
-                this.FSRoot = buildFS(this.subDocuments)
+                // this.FSRoot = buildFS(this.subDocuments)
                 return this.sync()
             }
         }
