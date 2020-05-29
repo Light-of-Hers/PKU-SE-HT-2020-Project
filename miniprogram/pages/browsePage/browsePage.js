@@ -110,8 +110,16 @@ Page({
                 itemList: ['删除', '重命名'],
                 success: res => {
                     if (res.tapIndex == 0) {
-                        self.deleteFile(file);
-                        self.render();
+                        wx.showToast({
+                            title: '提示',
+                            content: `确认删除文件${file.name}？`,
+                            success: res => {
+                                if (res.confirm) {
+                                    self.deleteFile(file);
+                                    self.render();
+                                }
+                            },
+                        });
                     } else {
                         self.data.needRerender = true;
                         app.globalData.tmp_arg = file;

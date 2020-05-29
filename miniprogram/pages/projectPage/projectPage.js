@@ -58,8 +58,16 @@ Page({
             itemList: ['删除', '重命名'],
             success: res => {
                 if (res.tapIndex == 0) {
-                    self.data.project.deleteDocument(doc.id);
-                    self.render();
+                    wx.showToast({
+                        title: '提示',
+                        content: `确认删除主文档${doc.name}？`,
+                        success: res => {
+                            if (res.confirm) {
+                                self.data.project.deleteDocument(doc.id);
+                                self.render();
+                            }
+                        },
+                    });
                 } else {
                     self.data.needRerender = true;
                     app.globalData.tmp_arg = doc;
