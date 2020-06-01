@@ -110,9 +110,9 @@ Page({
                 itemList: ['删除', '重命名'],
                 success: res => {
                     if (res.tapIndex == 0) {
-                        wx.showToast({
+                        wx.showModal({
                             title: '提示',
-                            content: `确认删除文件${file.name}？`,
+                            content: `确认删除文件“${file.name}”？`,
                             success: res => {
                                 if (res.confirm) {
                                     self.deleteFile(file);

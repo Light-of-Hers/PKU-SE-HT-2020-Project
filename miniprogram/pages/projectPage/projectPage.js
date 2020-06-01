@@ -54,13 +54,16 @@ Page({
         const self = this;
         const idx = event.currentTarget.dataset.fileIndex;
         const doc = self.data.docs[idx];
+        let action = "";
+        const itemList = ['删除', '重命名'];
         wx.showActionSheet({
-            itemList: ['删除', '重命名'],
+            itemList: itemList,
             success: res => {
-                if (res.tapIndex == 0) {
-                    wx.showToast({
+                action = itemList[res.tapIndex];
+                if (action === "删除") {
+                    wx.showModal({
                         title: '提示',
-                        content: `确认删除主文档${doc.name}？`,
+                        content: `确认删除主文档“${doc.name}”？`,
                         success: res => {
                             if (res.confirm) {
                                 self.data.project.deleteDocument(doc.id);
@@ -68,7 +71,7 @@ Page({
                             }
                         },
                     });
-                } else {
+                } else if (action === "重命名") {
                     self.data.needRerender = true;
                     app.globalData.tmp_arg = doc;
                     wx.navigateTo({
