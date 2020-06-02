@@ -71,11 +71,11 @@ Page({
     const self = this;
     var user = client.getUser();
     let tm0 = {};tm0["text"] = phom0;
-    let ts0 = {};image["path"] = phom1;
-    let ts1 = {};ts0["text"] = phos0;
-    let ts2 = {};ts1["text"] = phos1;
-    let ts3 = {};ts2["text"] = phos2;
-    let image = {}; ts3["text"] = phos3;
+    let image = {};image["path"] = phom1;
+    let ts0 = {};ts0["text"] = phos0;
+    let ts1 = {};ts1["text"] = phos1;
+    let ts2 = {};ts2["text"] = phos2;
+    let ts3 = {};ts3["text"] = phos3;
     user.createProject(self.data.proname)
     .then((newPro)=>{
       Promise.all([
@@ -130,8 +130,8 @@ Page({
     const self = this;
     var user = client.getUser();
     let tm0 = {};tm0["text"] = artm0;
-    let ts0 = {};image["path"] = artm1;
-    let image = {};ts0["text"] = arts0;
+    let ts0 = {};ts0["text"] = arts0;
+    let image = {};image["path"] = artm1;
     user.createProject(self.data.proname)
     .then((newPro)=>{
       Promise.all([
