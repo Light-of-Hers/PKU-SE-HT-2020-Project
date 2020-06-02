@@ -286,33 +286,28 @@ function getContractList(serverAddr, credential, callback) {
  */
 function executeContract(contractInfo, serverAddr, credential, callback) {
     if (!serverAddr) serverAddr = getServerAddr();
-    const baseUrl = `http://47.97.168.61/contract/SCIDE/SCManager`;
+    const baseUrl = `${serverAddr}/contract/executeContract`;
     var params = {
         action: 'executeContract',
         contractID: contractInfo.id,
         operation: contractInfo.method,
         arg: contractInfo.arg,
         pubkey: credential.publicKey,
+        from: credential.publicKey,
+        accessToken: credential.credential,
         signature: signature(`${contractInfo.id}|${contractInfo.method}|${contractInfo.arg}|${credential.publicKey}`,
                             credential) 
     };
 
-    let url = baseUrl + '?'
-    let first = true
-    for(let key in params) {
-        if(!first) {
-            url += '&'
-        } 
-        url += `${key}=${params[key]}`
-        first = false
-    }
-    url = encodeURI(url)
-
     wx.request({
-        url: url,
-        method: "GET",
+        url: baseUrl,
+        method: "POST",
+        data: params,
+        header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
         success: function(res) {
-            callback(undefined, JSON.parse(res.data.data))
+            callback(undefined, JSON.parse(res.data.data.data))
         },
         fail: function(res) {
             callback(new Error("network error"));
