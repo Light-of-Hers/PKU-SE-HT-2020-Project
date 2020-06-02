@@ -3,6 +3,13 @@
   border-radius: 98rpx;
   background: bg_blue;
   color: #042f6b;
+  font-size: 32rpx;
+}
+
+.btn-wrap {
+  margin: 20rpx;
+  display: flex;
+  justify-content: space-between;
 }
 
 .input {
