@@ -24,12 +24,22 @@ Page({
             if (file instanceof fs.BaseFile) {
                 project.renameDocument(file.doc.id, file.name, file.getPath());
                 if (file instanceof fs.DirFile) {
-                    file.children.forEach((_, child) => dfs(child));
+                    file.children.forEach((child, name) => {
+                        if (name == "..") return;
+                        dfs(child);
+                    });
                 }
             }
         };
         if (target instanceof fs.BaseFile) {
-            target.name = newName;
+            if (target.parent) {
+                const parent = target.parent;
+                parent.removeChild(target);
+                target.name = newName;
+                parent.addChild(target);
+            } else {
+                target.name = newName;
+            }
             dfs(target);
         } else if (target) {
             project.renameDocument(target.id, newName);

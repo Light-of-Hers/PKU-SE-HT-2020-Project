@@ -66,7 +66,7 @@ class DirFile extends BaseFile {
     removeChild(child) {
         if (child instanceof BaseFile) {
             this.children.delete(child.name);
-        } else if (child instanceof String) {
+        } else {
             this.children.delete(child);
         }
     }
