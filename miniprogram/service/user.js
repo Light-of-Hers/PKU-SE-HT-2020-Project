@@ -1,5 +1,7 @@
 const taas = require('./taas.js')
 const Project = require('./project.js')
+const Document = require('./document.js')
+const {buildFS} = require('./filesys.js')
 
 class User {
     constructor(name, credential) {
@@ -89,6 +91,99 @@ class User {
             }
         }
         return Promise.reject(`Project with id=${id} not found`)
+    }
+
+    createCertificate(id) {
+        const project = this.findProjectByID(id)
+        let content = {
+            name: project.name,
+            mainDocuments: project.mainDocuments.map((d) => {
+                return {
+                    name: d.name,
+                    type: d.type,
+                    versions: d.versions.map((v) => {
+                        return {timestamp: v.timestamp, hashId: v.hashId}
+                    })
+                }
+            }),
+            subDocuments: project.subDocuments.map((d) => {
+                return {
+                    name: d.name,
+                    type: d.type,
+                    path: d.path,
+                    versions: d.versions.map((v) => {
+                        return {timestamp: v.timestamp, hashId: v.hashId}
+                    })
+                }
+            })
+        }
+        return taas.executeContract({
+            method: 'createCertificate',
+            arg: JSON.stringify(content)
+        })
+        .then((res) => {
+            if(res.status != "Success") {
+                console.log(res)
+                throw new Error('executeContract status: ' + res.status)
+            }
+            const data = JSON.parse(res.result)
+
+            return {
+                time: data.time,
+                content: data.id
+            }
+        })
+    }
+
+    verifyCertificate(content) {
+        return taas.executeContract({
+            method: 'verifyCertificate',
+            arg: content
+        })
+        .then((res) => {
+            if(res.status != "Success") {
+                console.log(res)
+                throw new Error('executeContract status: ' + res.status)
+            }
+            let result = JSON.parse(res.result)
+            if(!result.valid) {
+                return {valid: false}
+            }
+            result = result.data
+            let project = new Project(NaN, result.content.name)
+            let i = 0
+            project.mainDocuments = result.content.mainDocuments.map((v) => {
+                let doc = new Document({
+                    name: v.name,
+                    type: v.type,
+                    id: i++, 
+                    isMain: true
+                })
+                doc._setVersions(v.versions)
+                doc.readonly = true
+                return doc
+            })
+            project.subDocuments = result.content.subDocuments.map((v) => {
+                let doc = new Document({
+                    name: v.name,
+                    type: v.type,
+                    id: i++,
+                    path: v.path,
+                    isMain: false
+                })
+                doc._setVersions(v.versions)
+                doc.readonly = true
+                return doc
+            })
+            project.FSRoot = buildFS(project.subDocuments)
+            project.readonly = true
+            return {
+                valid: true,
+                time: result.time,
+                publisher: result.publisher,
+                project: project
+            }
+        })
     }
 }
 

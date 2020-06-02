@@ -122,6 +122,12 @@ class Document {
         this._time = new Date().getTime()
         this.sync()
     }
+
+    _setVersions(versions) {
+        this.versions = versions.map((v) => {
+            return new Version(v.timestamp, v.hashId)
+        })
+    }
 }
 
 module.exports = Document
