@@ -51,7 +51,7 @@ Page({
         const self = this;
         return new Promise((resolve, reject) => {
             new QRCode('qrcode', {
-                text: 'pikachu~pkiapika',
+                text: self.data.info.content,
                 width: 200,
                 height: 200,
                 padding: 12,
@@ -79,7 +79,7 @@ Page({
         canvas.setFontSize(10);
         canvas.setTextBaseline("bottom");
         canvas.fillText(info.time, real_x(1743), real_y(1227));
-        canvas.fillText(info.author, real_x(1066), real_y(1548));
+        canvas.fillText(`${info.author} (publicKey: ${info.publicKey.substring(0, 16)}...)`, real_x(1066), real_y(1548));
         canvas.fillText(info.name, real_x(1173), real_y(1734));
         canvas.fillText(info.time0, real_x(1252), real_y(1858));
         canvas.fillText(`~ ${info.time1}`, real_x(1252), real_y(1858) + 10);

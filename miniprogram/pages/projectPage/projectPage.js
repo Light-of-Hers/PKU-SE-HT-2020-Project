@@ -105,17 +105,22 @@ Page({
             });
             return;
         }
-        app.globalData.tmp_arg = {
-            time0: time.formatDate(min_ver.timestamp),
-            time1: time.formatDate(max_ver.timestamp),
-            hash0: min_ver.timestamp,
-            hash1: max_ver.timestamp,
-            author: user.name,
-            name: project.name,
-            time: time.formatDate(new Date()),
-        };
-        wx.navigateTo({
-            url: '../certificatePage/certificatePage',
+        user.createCertificate(project.id).then(({ time: cur_time, content }) => {
+            app.globalData.tmp_arg = {
+                time0: time.formatDate(min_ver.timestamp),
+                time1: time.formatDate(max_ver.timestamp),
+                hash0: min_ver.timestamp,
+                hash1: max_ver.timestamp,
+                author: user.name,
+                name: project.name,
+                time: time.formatDate(cur_time),
+                content: content,
+                publicKey: user.credential.publicKey,
+            };
+            console.log(cur_time);
+            wx.navigateTo({
+                url: '../certificatePage/certificatePage',
+            });
         });
     },
 })
