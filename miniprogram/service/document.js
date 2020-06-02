@@ -94,6 +94,8 @@ class Document {
     }
 
     createVersion(content) {
+        if(this.readonly)
+            return Promise.reject("Can not create version in a readonly document")
         return new Promise((resolve, reject) => {
             let hashId
             taas.storeEvidence(content)
