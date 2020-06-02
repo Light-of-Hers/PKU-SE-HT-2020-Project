@@ -14,13 +14,17 @@ Page({
       privateKey: ''
     },
     Myname:'',
-    newname:''
+    newname:'',
+    cert:''
   },
 
   onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: "我的"
+    })
     if(client.getUser() == null) {
       wx.redirectTo({
-        url: '../index/index',
+        //url: '../index/index',
       });
     }
     else{
@@ -30,13 +34,14 @@ Page({
         Mycre: user.credential,
         Myname: user.name
       });
+      
     }
   },
 
   onShow: function () {
     if(client.getUser() == null) {
     wx.redirectTo({
-      url: '../index/index',
+      //url: '../index/index',
     });
     }   
     else{
@@ -67,6 +72,41 @@ Page({
      })
   },
 
+  ScanCode: function(){
+    wx.scanCode({
+      success: (res) => {
+        this.setData({
+          cert: res.result
+        })
+        client.getUser().verifyCertificate(cert)
+        .then((re)=>{
+          if(re.validated === false){
+            wx.showModal({
+              title: '提示',
+              content: '这个证书是假的！',
+              showCancel: false,
+              confirmText: "我知道了"
+            })
+          }
+          else{
+            wx.showModal({
+              title: '提示',
+              content: '这个证书是真的！',
+              showCancel: false,
+              confirmText: "我知道了"
+            })
+            app.globalData.tmp_arg = re.project;
+            wx.navigateTo({
+              url: '../projectPage/projectPage',
+            })
+            console.log(project.name);
+          }
+        }).catch(()=>{
+          wx.showToast({title: "验证失败！"})
+        })
+      }
+    })
+  },
   logout: function(){
     client.logout();
     wx.showToast({title: "登出成功！", time: 2000});

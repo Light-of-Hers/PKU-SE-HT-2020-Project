@@ -5,5 +5,14 @@
 				bindconfirm="newPro"
 				placeholder="新建作品名称" />
 		</view>
-	<button class = "btn" bindtap = "newPro"> 新建作品 </button>
+	<view class = "btn-wrap">
+		<button class = "btn" bindtap = "newPho"> 新建摄影作品 </button>
+		<button class = "btn" bindtap = "newArt"> 新建绘画作品 </button>
+	</view>
+	<view class = "btn-wrap">
+		<button class = "btn" bindtap = "newReal"> 新建纪实文学作品 </button>
+		<button class = "btn" bindtap = "newVir"> 新建虚构文学作品 </button>
+	</view>
+		<button class = "btn" bindtap = "newPro"> 新建默认作品 </button>
+
 </view>

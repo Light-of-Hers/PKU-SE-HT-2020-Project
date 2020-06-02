@@ -18,6 +18,7 @@
   padding-left: 30rpx;
   padding-top: 30rpx;
   padding-bottom: 20rpx;
+  text-align: center;
 }
 
 .input {
@@ -45,4 +46,14 @@
 .icon-img {
   margin: 30rpx;
   text-align: center;
+}
+
+.image-container {
+  display: flex;
+  margin: 20rpx;
+}
+.btn-wrap {
+  margin: 20rpx;
+  display: flex;
+  justify-content: space-between;
 }
