@@ -13,6 +13,8 @@ class User {
     }
 
     sync() {
+        if(this.readonly)
+            return Promise.resolve()
         const data = {
             time: this._time,
             name: this.name,

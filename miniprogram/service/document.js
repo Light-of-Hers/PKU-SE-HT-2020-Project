@@ -54,6 +54,8 @@ class Document {
     }
 
     sync() {
+        if(this.readonly)
+            return Promise.resolve()
         console.log('syncing...')
         const data = {
             id: this.id,
