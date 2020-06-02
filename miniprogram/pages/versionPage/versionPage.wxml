@@ -15,7 +15,7 @@
                         {{formatTime[index]}}
                     </view>
                     <view class= 'hashId-txt'>
-                        hashId: {{item.hashId}}
+                        证据编码: {{item.hashId}}
                     </view>
                 </view>
             </view>

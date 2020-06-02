@@ -42,7 +42,7 @@ Page({
     this.data.doc.createVersion({"text": this.data.input})
     .then(function(res) {
       wx.showToast({
-        title: '上传成功',
+        title: '已上链存证固化',
         icon: 'success',
         duration: 2000
       })
@@ -54,7 +54,7 @@ Page({
       console.error(e)
       wx.showModal({
         title: "提示",
-        content: "上传失败",
+        content: "上链失败",
         success (res) {
           if (res.confirm) {
             wx.navigateBack({})
@@ -78,7 +78,7 @@ Page({
     this.data.doc.createVersion({"path": this.data.imgpath})
     .then(function(res) {
       wx.showToast({
-        title: '上传成功',
+        title: '已上链存证固化',
         icon: 'success',
         duration: 2000
       })
@@ -90,7 +90,7 @@ Page({
       console.error(e)
       wx.showModal({
         title: "提示",
-        content: "上传失败",
+        content: "上链失败",
         success (res) {
           if (res.confirm) {
             wx.navigateBack({})
