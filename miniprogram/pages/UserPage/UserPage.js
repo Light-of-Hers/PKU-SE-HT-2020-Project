@@ -73,14 +73,15 @@ Page({
   },
 
   ScanCode: function(){
+    const self = this;
     wx.scanCode({
       success: (res) => {
-        this.setData({
+        self.setData({
           cert: res.result
         })
-        client.getUser().verifyCertificate(cert)
+        client.getUser().verifyCertificate(self.data.cert)
         .then((re)=>{
-          if(re.validated === false){
+          if(re.valid === false){
             wx.showModal({
               title: '提示',
               content: '这个证书是假的！',
@@ -91,7 +92,7 @@ Page({
           else{
             wx.showModal({
               title: '提示',
-              content: '这个证书是真的！',
+              content: '这个证书是真的！签发时间：'+re.time+"持有者公钥："+re.publisher,
               showCancel: false,
               confirmText: "我知道了"
             })
