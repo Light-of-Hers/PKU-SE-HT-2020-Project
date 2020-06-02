@@ -29,19 +29,24 @@
   padding: 20rpx;
   border-top:1px solid #e0e0e0;
   display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
   align-items: center;
   text-align: left;
 }
 
-.under image{
+.item image{
   width: 40rpx;
   height: 40rpx;
   opacity: 0.5;
 }
-.under text{
+.item text{
   flex: 1;
-  font-size: 40rpx;
-  color: #e0e0e0;
+  font-size: 35rpx;
+  color: #1a238d;
 }
 .no-version {
   height: 1000rpx;

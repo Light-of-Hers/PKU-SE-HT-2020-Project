@@ -8,6 +8,7 @@ Page({
     curIndex: 0,
     curtime: null,
     curcontent: null,
+    curHash: null,
     loading: true,
     needRender: true,
     history: null,
@@ -106,6 +107,7 @@ Page({
         curIndex: tempIndex,
         curtime: time.formatDate(self.data.doc.versions[tempIndex].timestamp),
         curcontent: self.data.doc.type == 'text'? res.text: res.path,
+        curHash: self.data.doc.versions[tempIndex].hashId.toString().substr(0, 20),
         loading: false,
         downloadtime: time.formatDate(new Date().toString())
       })

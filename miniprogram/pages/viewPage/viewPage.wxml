@@ -1,5 +1,5 @@
 <view>
-  <loading hidden = "{{!loading}}"> 加载中... </loading>
+  <loading hidden = "{{!loading}}"> 正在从区块链取证... </loading>
   <view hidden = "{{loading}}">
     <view class = "container">
       <block wx:if = "{{doc.versions.length}}">
@@ -18,8 +18,13 @@
         </block> 
         
         <view class = "under">
-          <text> 获取时间：{{downloadtime}} </text>
-          <image src = "delete.png" bindtap= "deleteVersion"/>
+          <view class = "item">
+            <text> 实时取证自区块链：{{downloadtime}} </text>
+            <image src = "delete.png" bindtap= "deleteVersion"/>
+          </view>
+          <view class = "item">
+            <text> 证据编码：{{curHash}} </text>
+          </view>
         </view>
       </block>
       <block wx:else>
