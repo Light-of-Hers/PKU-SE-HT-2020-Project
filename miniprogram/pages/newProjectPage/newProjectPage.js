@@ -70,34 +70,28 @@ Page({
   newPho: function(){
     const self = this;
     var user = client.getUser();
-    let tm0 = {};
-    let ts0 = {};
-    let ts1 = {};
-    let ts2 = {};
-    let ts3 = {};
-    let image = {};
+    let tm0 = {};tm0["text"] = phom0;
+    let ts0 = {};image["path"] = phom1;
+    let ts1 = {};ts0["text"] = phos0;
+    let ts2 = {};ts1["text"] = phos1;
+    let ts3 = {};ts2["text"] = phos2;
+    let image = {}; ts3["text"] = phos3;
     user.createProject(self.data.proname)
     .then((newPro)=>{
       Promise.all([
         newPro.createMainDocument("作品简介", "text"),
-        tm0["text"] = phom0,
         newPro.mainDocuments[0].createVersion(tm0),
         newPro.createMainDocument("作品", "image"),
-        image["path"] = phom1,
         newPro.mainDocuments[1].createVersion(image),
         newPro.createSubDocument("参数记录", "text", "/参数记录/"),
         newPro.createSubDocument("参数记录", "text", "/参数记录/参数记录帮助手册.txt"),
-        ts0["text"] = phos0,
         newPro.subDocuments[1].createVersion(ts0),
         newPro.createSubDocument("调色参数", "text", "/参数记录/调色参数.txt"),
-        ts1["text"] = phos1,
         newPro.subDocuments[2].createVersion(ts1),
         newPro.createSubDocument("硬件参数", "text", "/参数记录/硬件参数.txt"),
-        ts2["text"] = phos2,
         newPro.subDocuments[3].createVersion(ts2),
         newPro.createSubDocument("灵感碎片", "text", "/灵感碎片/"),
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
-        ts3["text"] = phos3,
         newPro.subDocuments[5].createVersion(ts3),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
@@ -135,21 +129,18 @@ Page({
   newArt: function(){ 
     const self = this;
     var user = client.getUser();
-    let tm0 = {};
-    let ts0 = {};
-    let image = {};
+    let tm0 = {};tm0["text"] = artm0;
+    let ts0 = {};image["path"] = artm1;
+    let image = {};ts0["text"] = arts0;
     user.createProject(self.data.proname)
     .then((newPro)=>{
       Promise.all([
         newPro.createMainDocument("作品简介", "text"),
-        tm0["text"] = artm0,
         newPro.mainDocuments[0].createVersion(tm0),
         newPro.createMainDocument("作品", "image"),
-        image["path"] = artm1,
         newPro.mainDocuments[1].createVersion(image),
         newPro.createSubDocument("灵感碎片", "text", "/灵感碎片/"),
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
-        ts0["text"] = arts0,
         newPro.subDocuments[1].createVersion(ts0),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
