@@ -3,7 +3,7 @@
     <view class="col">
         <view class='item' bindtap="onNewDoc">
             <view class='icon'>
-                <image src="./document-new.svg"></image>
+                <image src="./new-doc.svg"></image>
             </view>
             <view class='bottom'>
                 <view class='txt'>
@@ -16,7 +16,7 @@
     <view class="col">
         <view class='item' bindtap="onNewFolder">
             <view class='icon'>
-                <image src="./folder-new.svg"></image>
+                <image src="./new-folder.svg"></image>
             </view>
             <view class='bottom'>
                 <view class='txt'>

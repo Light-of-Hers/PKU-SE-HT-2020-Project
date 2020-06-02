@@ -54,12 +54,11 @@ Page({
         const self = this;
         const idx = event.currentTarget.dataset.fileIndex;
         const doc = self.data.docs[idx];
-        let action = "";
         const itemList = ['删除', '重命名'];
         wx.showActionSheet({
             itemList: itemList,
             success: res => {
-                action = itemList[res.tapIndex];
+                const action = itemList[res.tapIndex];
                 if (action === "删除") {
                     wx.showModal({
                         title: '提示',
@@ -79,6 +78,11 @@ Page({
                     });
                 }
             }
+        });
+    },
+    onCreateCertificate: function () {
+        wx.showToast({
+            title: '还没实现QAQ',
         });
     }
 })
