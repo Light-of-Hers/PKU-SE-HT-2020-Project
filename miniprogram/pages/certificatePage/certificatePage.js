@@ -11,6 +11,7 @@ Page({
         images: {},
         qrcode: "",
         info: null,
+        QRCodeSaved: false,
     },
     onLoad: function () {
         const self = this;
@@ -59,6 +60,7 @@ Page({
                 callback: (res) => {
                     self.setData({
                         qrcode: res.path,
+                        QRCodeSaved: true,
                     });
                     resolve();
                 }
@@ -84,7 +86,6 @@ Page({
         canvas.fillText(info.time0, real_x(1252), real_y(1858));
         canvas.fillText(`~ ${info.time1}`, real_x(1252), real_y(1858) + 10);
         canvas.fillText(`${info.hash0} ~ ${info.hash1}`, real_x(1252), real_y(2124));
-
         canvas.draw();
     },
     onExportCertificate: function () {

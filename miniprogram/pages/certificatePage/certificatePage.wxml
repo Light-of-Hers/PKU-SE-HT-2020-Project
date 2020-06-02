@@ -1,3 +1,5 @@
 <canvas canvas-id='certificate' style="background: #fff;width:{{width}}px;height:{{height}}px"
     bindlongtap="onExportCertificate"></canvas>
-<canvas canvas-id="qrcode" style="background: transparent; width: 200px;height: 200px;"></canvas>
+<view wx:if="{{!QRCodeSaved}}">
+    <canvas canvas-id="qrcode" style="background: transparent; width: 200px;height: 200px;"></canvas>
+</view>
