@@ -141,6 +141,16 @@ class Project {
         }
         return Promise.reject(`Document with id=${id} not found`)
     }
+
+    renameDocument(id, name, path="") {
+        const d = this.findDocumentByID(id)
+        d.name = name
+        d.path = path
+        let time = new Date().getTime()
+        this._time = time
+        d._time = time
+        return Promise.all(this.sync(), d.sync())
+    }
 } 
 
 module.exports = Project
