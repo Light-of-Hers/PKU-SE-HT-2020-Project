@@ -149,7 +149,7 @@ class Project {
         let time = new Date().getTime()
         this._time = time
         d._time = time
-        return Promise.all(this.sync(), d.sync())
+        return Promise.all([this.sync(), d.sync()])
     }
 } 
 

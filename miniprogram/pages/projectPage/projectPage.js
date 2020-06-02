@@ -1,16 +1,19 @@
 const fs = require("../../service/filesys");
-const document = require("../../service/document")
+const document = require("../../service/document");
 const app = getApp();
+const time = require("../../utils/util");
 
 Page({
     data: {
+        user: null,
         project: null,
         docs: null,
         needRerender: false,
     },
     onLoad: function () {
         const self = this;
-        self.data.project = app.globalData.tmp_arg;
+        self.data.project = app.globalData.tmp_arg.project;
+        self.data.user = app.globalData.tmp_arg.user;
         self.render();
     },
     onShow: function () {
@@ -72,7 +75,7 @@ Page({
                     });
                 } else if (action === "重命名") {
                     self.data.needRerender = true;
-                    app.globalData.tmp_arg = doc;
+                    app.globalData.tmp_arg = { target: doc, project: self.data.project };
                     wx.navigateTo({
                         url: '../renamePage/renamePage',
                     });
@@ -81,8 +84,38 @@ Page({
         });
     },
     onCreateCertificate: function () {
-        wx.showToast({
-            title: '还没实现QAQ',
+        const self = this;
+        const { project, user } = self.data;
+        let max_ver = null, min_ver = null;
+        const iter = docs => {
+            for (const doc of docs) {
+                for (const ver of doc.versions) {
+                    if (!max_ver || ver.timestamp > max_ver.timestamp)
+                        max_ver = ver;
+                    if (!min_ver || ver.timestamp < min_ver.timestamp)
+                        min_ver = ver;
+                }
+            }
+        };
+        iter(project.mainDocuments);
+        iter(project.subDocuments);
+        if (!min_ver) {
+            wx.showToast({
+                title: '您的作品好像还没有开始动诶……',
+            });
+            return;
+        }
+        app.globalData.tmp_arg = {
+            time0: time.formatDate(min_ver.timestamp),
+            time1: time.formatDate(max_ver.timestamp),
+            hash0: min_ver.timestamp,
+            hash1: max_ver.timestamp,
+            author: user.name,
+            name: project.name,
+            time: time.formatDate(new Date()),
+        };
+        wx.navigateTo({
+            url: '../certificatePage/certificatePage',
         });
-    }
+    },
 })

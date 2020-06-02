@@ -38,9 +38,10 @@ Page({
       }
     },
     onViewProject: function (event) {
+        const self = this;
         const idx = event.currentTarget.dataset.fileIndex;
         const project = this.data.projects[idx];
-        app.globalData.tmp_arg = project;
+        app.globalData.tmp_arg = {project: project, user: self.data.user};
         wx.navigateTo({
           url: '../projectPage/projectPage',
         })

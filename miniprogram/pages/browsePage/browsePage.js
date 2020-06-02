@@ -92,10 +92,12 @@ Page({
         const self = this;
         const dfs = (file) => {
             if (file instanceof fs.DocFile) {
-                self.data.project.deleteDocument(file.getId());
+                if (file.doc)
+                    self.data.project.deleteDocument(file.doc.id);
             } else if (file instanceof fs.DirFile) {
                 file.children.forEach((_, chld) => dfs(chld));
-                self.data.project.deleteDocument(file.getId());
+                if (file.doc)
+                    self.data.project.deleteDocument(file.doc.id);
             }
         };
         dfs(file);
@@ -122,7 +124,7 @@ Page({
                         });
                     } else {
                         self.data.needRerender = true;
-                        app.globalData.tmp_arg = file;
+                        app.globalData.tmp_arg = { target: file, project: self.data.project };
                         wx.navigateTo({
                             url: '../renamePage/renamePage',
                         });
