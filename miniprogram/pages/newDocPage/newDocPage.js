@@ -68,6 +68,7 @@ Page({
     var typ, suffix;
     self.data.type? typ = "text":typ = "path";
     self.data.type? suffix = ".txt":suffix = ".png";//不确定图片后缀应该写什么
+    suffix = ""; // 那就不加吧~
     self.data.docname += suffix
     self.data.pro.createSubDocument(self.data.docname, typ === "text" ? "text" : "image", self.data.cwd.getPath()+self.data.docname)
     .then((newDocument)=>{

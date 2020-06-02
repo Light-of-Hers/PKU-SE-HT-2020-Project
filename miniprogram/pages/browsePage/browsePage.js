@@ -92,12 +92,13 @@ Page({
         const self = this;
         const dfs = (file) => {
             if (file instanceof fs.DocFile) {
-                if (file.doc)
-                    self.data.project.deleteDocument(file.doc.id);
+                self.data.project.deleteDocument(file.doc.id);
             } else if (file instanceof fs.DirFile) {
-                file.children.forEach((_, chld) => dfs(chld));
-                if (file.doc)
-                    self.data.project.deleteDocument(file.doc.id);
+                file.children.forEach((chld, name) => {
+                    if (name == "..") return;
+                    dfs(chld);
+                });
+                self.data.project.deleteDocument(file.doc.id);
             }
         };
         dfs(file);
