@@ -96,7 +96,7 @@ Page({
               showCancel: false,
               confirmText: "我知道了"
             })
-            app.globalData.tmp_arg = re.project;
+            app.globalData.tmp_arg = {project: re.project};
             wx.navigateTo({
               url: '../projectPage/projectPage',
             })
