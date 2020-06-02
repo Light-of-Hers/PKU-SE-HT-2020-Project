@@ -24,7 +24,7 @@ Page({
     })
     if(client.getUser() == null) {
       wx.redirectTo({
-        //url: '../index/index',
+        url: '../index/index',
       });
     }
     else{
@@ -41,7 +41,7 @@ Page({
   onShow: function () {
     if(client.getUser() == null) {
     wx.redirectTo({
-      //url: '../index/index',
+      url: '../index/index',
     });
     }   
     else{
