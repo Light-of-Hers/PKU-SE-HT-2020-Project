@@ -85,7 +85,7 @@ Page({
         canvas.fillText(info.name, real_x(1173), real_y(1734));
         canvas.fillText(info.time0, real_x(1252), real_y(1858));
         canvas.fillText(`~ ${info.time1}`, real_x(1252), real_y(1858) + 10);
-        canvas.fillText(`${info.hash0} ~ ${info.hash1}`, real_x(1252), real_y(2124));
+        canvas.fillText(`${info.hash0.substring(0, 6)} ~ ${info.hash1.substring(0, 6)}`, real_x(1252), real_y(2124));
         canvas.draw();
     },
     onExportCertificate: function () {
