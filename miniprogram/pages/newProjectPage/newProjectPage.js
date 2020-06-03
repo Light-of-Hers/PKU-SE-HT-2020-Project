@@ -80,40 +80,51 @@ Page({
     .then((newPro)=>{
       Promise.all([
         newPro.createMainDocument("作品简介", "text"),
-        newPro.mainDocuments[0].createVersion(tm0),
         newPro.createMainDocument("作品", "image"),
-        newPro.mainDocuments[1].createVersion(image),
         newPro.createSubDocument("参数记录", "text", "/参数记录/"),
         newPro.createSubDocument("参数记录", "text", "/参数记录/参数记录帮助手册.txt"),
-        newPro.subDocuments[1].createVersion(ts0),
         newPro.createSubDocument("调色参数", "text", "/参数记录/调色参数.txt"),
-        newPro.subDocuments[2].createVersion(ts1),
         newPro.createSubDocument("硬件参数", "text", "/参数记录/硬件参数.txt"),
-        newPro.subDocuments[3].createVersion(ts2),
         newPro.createSubDocument("灵感碎片", "text", "/灵感碎片/"),
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
-        newPro.subDocuments[5].createVersion(ts3),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
-        newPro.FSRoot = fs.buildFS(newPro.subDocuments);
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '新建摄影作品成功！',
-          success (res) {
-            if (res.confirm) {
-              wx.navigateBack({//返回
-                delta: 1
-              });
+        Promise.all([
+          newPro.mainDocuments[0].createVersion(tm0),
+          newPro.mainDocuments[1].createVersion(image),
+          newPro.subDocuments[1].createVersion(ts0),
+          newPro.subDocuments[2].createVersion(ts1),
+          newPro.subDocuments[3].createVersion(ts2),
+          newPro.subDocuments[5].createVersion(ts3),
+        ]).then(()=>{
+          newPro.FSRoot = fs.buildFS(newPro.subDocuments);
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '新建摄影作品成功！',
+            success (res) {
+              if (res.confirm) {
+                wx.navigateBack({//返回
+                  delta: 1
+                });
+              }
             }
-          }
+          })
+        })
+        .catch(()=>{
+          client.getUser().deleteProject(newPro.id);
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '新建摄影作品失败！'
+          })
         })
       }).catch(()=>{
-        //client.getUser().deleteProject(newPro.id);
+        client.getUser().deleteProject(newPro.id);
         wx.showModal({
           title: '提示',
           showCancel: false,
-          content: '新建摄影作品失败！'
+          content: '2新建摄影作品失败！'
         })
       })
     })
@@ -136,26 +147,37 @@ Page({
     .then((newPro)=>{
       Promise.all([
         newPro.createMainDocument("作品简介", "text"),
-        newPro.mainDocuments[0].createVersion(tm0),
         newPro.createMainDocument("作品", "image"),
-        newPro.mainDocuments[1].createVersion(image),
         newPro.createSubDocument("灵感碎片", "text", "/灵感碎片/"),
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
-        newPro.subDocuments[1].createVersion(ts0),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
-        newPro.FSRoot = fs.buildFS(newPro.subDocuments);
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '新建绘画作品成功！',
-          success (res) {
-            if (res.confirm) {
-              wx.navigateBack({//返回
-                delta: 1
-              });
+        Promise.all([
+          newPro.mainDocuments[0].createVersion(tm0),
+          newPro.mainDocuments[1].createVersion(image),
+          newPro.subDocuments[1].createVersion(ts0),
+        ]).then(()=>{
+          newPro.FSRoot = fs.buildFS(newPro.subDocuments);
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '新建绘画作品成功！',
+            success (res) {
+              if (res.confirm) {
+                wx.navigateBack({//返回
+                  delta: 1
+                });
+              }
             }
-          }
+          })
+        })
+        .catch(()=>{
+          user.deleteProject(newPro.id);
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '2新建绘画作品失败！'
+          })
         })
       }).catch(()=>{
         user.deleteProject(newPro.id);
@@ -185,36 +207,46 @@ Page({
     let ts2 = {}; ts2["text"] = reals2;
     user.createProject(self.data.proname)
     .then((newPro)=>{
-      const root = newPro.FSRoot; 
       Promise.all([
         newPro.createMainDocument("第一章节", "text"),
-        newPro.mainDocuments[0].createVersion(tm0), 
         newPro.createMainDocument("作品简介", "text"),
-        newPro.mainDocuments[1].createVersion(tm1),
         newPro.createSubDocument("参考资料", "text", "/参考资料/"),
         newPro.createSubDocument("参考资料帮助手册", "text", "/参考资料/参考资料帮助手册.txt"),
-        newPro.subDocuments[1].createVersion(ts0),
         newPro.createSubDocument("访谈资料", "text", "/访谈资料/"),
         newPro.createSubDocument("访谈资料帮助手册", "text", "/访谈资料/访谈资料帮助手册.txt"),
-        newPro.subDocuments[3].createVersion(ts1),
         newPro.createSubDocument("灵感碎片", "text", "/灵感碎片/"),
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
-        newPro.subDocuments[5].createVersion(ts2),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
-        newPro.FSRoot = fs.buildFS(newPro.subDocuments);
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '新建纪实文学作品成功！',
-          success (res) {
-            if (res.confirm) {
-              wx.navigateBack({//返回
-                delta: 1
-              });
+        Promise.all([
+          newPro.mainDocuments[0].createVersion(tm0), 
+          newPro.mainDocuments[1].createVersion(tm1),
+          newPro.subDocuments[1].createVersion(ts0),
+          newPro.subDocuments[3].createVersion(ts1),
+          newPro.subDocuments[5].createVersion(ts2),
+        ]).then(()=>{
+          newPro.FSRoot = fs.buildFS(newPro.subDocuments);
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '新建纪实文学作品成功！',
+            success (res) {
+              if (res.confirm) {
+                wx.navigateBack({//返回
+                  delta: 1
+                });
+              }
             }
-          }
+          })
+        }).catch(()=>{
+          user.deleteProject(newPro.id);
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '2新建纪实文学作品失败！'
+          })
         })
+       
       }).catch(()=>{
         user.deleteProject(newPro.id);
         wx.showModal({
@@ -246,33 +278,44 @@ Page({
       const root = newPro.FSRoot; 
       Promise.all([
         newPro.createMainDocument("小说简介", "text"),
-        newPro.mainDocuments[0].createVersion(tm0),
         newPro.createMainDocument("第一章", "text"),
-        newPro.mainDocuments[1].createVersion(tm1),
         newPro.createSubDocument("大纲", "text", "/大纲/"),
         newPro.createSubDocument("大纲帮助手册", "text", "/大纲/大纲帮助手册.txt"),
-        newPro.subDocuments[1].createVersion(ts0),
         newPro.createSubDocument("人物小传", "text", "/人物小传/"),
         newPro.createSubDocument("人物小传帮助手册", "text", "/人物小传/人物小传帮助手册.txt"),
-        newPro.subDocuments[3].createVersion(ts1),
         newPro.createSubDocument("灵感碎片", "text", "/灵感碎片/"),
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
-        newPro.subDocuments[5].createVersion(ts2),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
-        newPro.FSRoot = fs.buildFS(newPro.subDocuments);
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '新建虚构文学作品成功！',
-          success (res) {
-            if (res.confirm) {
-              wx.navigateBack({//返回
-                delta: 1
-              });
+        Promise.all([
+          newPro.mainDocuments[0].createVersion(tm0),
+          newPro.mainDocuments[1].createVersion(tm1),
+          newPro.subDocuments[1].createVersion(ts0),
+          newPro.subDocuments[3].createVersion(ts1),
+          newPro.subDocuments[5].createVersion(ts2),
+        ]).then(()=>{
+          newPro.FSRoot = fs.buildFS(newPro.subDocuments);
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '新建虚构文学作品成功！',
+            success (res) {
+              if (res.confirm) {
+                wx.navigateBack({//返回
+                  delta: 1
+                });
+              }
             }
-          }
+          })
+        }).catch(()=>{
+          user.deleteProject(newPro.id);
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '2新建虚构作品失败！'
+          })
         })
+        
       }).catch(()=>{
         user.deleteProject(newPro.id);
         wx.showModal({

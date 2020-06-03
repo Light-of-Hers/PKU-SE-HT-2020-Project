@@ -98,7 +98,6 @@ Page({
               success (res) {
                 if (res.confirm) {
                   app.globalData.tmp_arg = {project: re.project};
-                  console.log(project.name);
                   wx.navigateTo({
                     url: '../projectPage/projectPage',
                   })
@@ -106,8 +105,6 @@ Page({
               }
             })
           }
-        }).catch(()=>{
-          wx.showToast({title: "验证失败！"})
         })
       }
     })
