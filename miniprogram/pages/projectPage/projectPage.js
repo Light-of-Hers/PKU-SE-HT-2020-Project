@@ -109,8 +109,8 @@ Page({
             app.globalData.tmp_arg = {
                 time0: time.formatDate(min_ver.timestamp),
                 time1: time.formatDate(max_ver.timestamp),
-                hash0: min_ver.timestamp,
-                hash1: max_ver.timestamp,
+                hash0: min_ver.hashId,
+                hash1: max_ver.hashId,
                 author: user.name,
                 name: project.name,
                 time: time.formatDate(cur_time),
