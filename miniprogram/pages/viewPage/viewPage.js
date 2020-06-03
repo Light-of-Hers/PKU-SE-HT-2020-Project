@@ -17,7 +17,7 @@ Page({
   onLoad: function(options) {
     this.setData({
       doc: app.globalData.tmp_arg,
-      history: (options.version_id != undefined)? options.version_id: null
+      history: (options.version_id != undefined)? parseInt(options.version_id): null
     });
     wx.setNavigationBarTitle({
       title: this.data.doc.name
@@ -100,7 +100,7 @@ Page({
     self.setData({
       loading: true
     });
-    
+
     self.data.doc.versions[tempIndex].getContent().then(function(res) {
       console.log(res);
       self.setData({

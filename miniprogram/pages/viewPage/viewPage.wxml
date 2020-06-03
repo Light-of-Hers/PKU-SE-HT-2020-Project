@@ -13,17 +13,18 @@
         </block>
         <block wx:elif = "{{doc.type == 'image'}}">
           <view class = "image-container">
-            <image src = "{{curcontent}}" mode = "widthFix" bindtap = "clickImg"/>
+            <image src = "{{curcontent}}" mode = "widthFix" style = "width:100%" bindtap = "clickImg"/>
           </view>
         </block> 
         
         <view class = "under">
           <view class = "item">
-            <text> 实时取证自区块链：{{downloadtime}} </text>
+            <image src = "chain.png" style = "margin-right:20rpx"/>
+            <text> 链上数据 : {{curHash}}</text>
             <image src = "delete.png" bindtap= "deleteVersion"/>
           </view>
           <view class = "item">
-            <text> 证据编码：{{curHash}} </text>
+            <text style = "color: #dad6d6;"> 取证时间： {{downloadtime}}</text>
           </view>
         </view>
       </block>
@@ -52,8 +53,8 @@
         <text> 新版本 </text>
       </view>
       <view class = 'edit' hover-class = "edit-hover" bindtap = "oldVersion">
+        <image src = "right.png" />
         <text> 老版本 </text>
-        <image src = "right.png" style = "margin-left: 20rpx; margin-right: 0rpx;"/>
       </view>
     </block>
   </view>

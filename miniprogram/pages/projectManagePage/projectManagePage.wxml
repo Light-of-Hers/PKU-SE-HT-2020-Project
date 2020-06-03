@@ -21,7 +21,7 @@
                         {{item.name}}
                     </view>
                     <view class= 'time-txt'>
-                        修改日期：{{formatTime[index]}}
+                        创建日期：{{formatTime[index]}}
                     </view>
                 </view>
             </view>
