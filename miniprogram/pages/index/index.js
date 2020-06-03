@@ -21,15 +21,14 @@ Page({
     })
     client.loadLocal()
     .then(() => {
+      wx.hideLoading({})
       wx.switchTab({
         url: '../projectManagePage/projectManagePage',
       })
     })
     .catch((e) => {
-      console.log(e)
-    })
-    .finally(() => {
       wx.hideLoading({})
+      console.log(e)
     })
   },
 
@@ -60,6 +59,7 @@ Page({
     })
     client.register(this.data.invitationCode, this.data.name)
     .then(() => {
+      wx.hideLoading({})
       wx.showToast({title: "注册成功！"})
       console.log(client.getUser())
       wx.switchTab({
@@ -67,10 +67,8 @@ Page({
       })
     })
     .catch((e) => {
-      wx.showToast({title: "注册失败：" + e.message, icon: "none"})
-    })
-    .finally(() => {
       wx.hideLoading({})
+      wx.showToast({title: "注册失败：" + e.message, icon: "none"})
     })
   },
 
@@ -81,16 +79,16 @@ Page({
     })
     client.login(this.data.credential)
     .then(() => {
+      wx.hideLoading({})
       wx.switchTab({
         url: '../projectManagePage/projectManagePage',
       })
     })
     .catch((e) => {
+      wx.hideLoading({})
       console.log(e)
     })
-    .finally(() => {
-      wx.hideLoading({})
-    })
+
   },
 
   cloudLogin: function() {
@@ -100,16 +98,16 @@ Page({
     })
     client.loadCloud()
     .then(() => {
+      wx.hideLoading({})
       wx.switchTab({
         url: '../projectManagePage/projectManagePage',
       })
     })
     .catch((e) => {
       console.log(e)
+      wx.hideLoading({})
       wx.showToast({title: "操作失败，请确认此微信号绑定过密钥", icon: "none"})
     })
-    .finally(() => {
-      wx.hideLoading({})
-    })
+
   }
 })

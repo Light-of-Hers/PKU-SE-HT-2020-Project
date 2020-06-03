@@ -48,6 +48,7 @@ Page({
     })
     user.createProject(self.data.proname)
     .then((newPro)=>{
+      wx.hideLoading({})
       wx.showModal({
         title: '提示',
         showCancel: false,
@@ -62,14 +63,12 @@ Page({
       })
     })
     .catch((e) =>{
+      wx.hideLoading({})
       wx.showModal({
         title: '提示',
         showCancel: false,
         content: '新建默认作品失败！',
       })
-    })
-    .finally(() => {
-      wx.hideLoading({})
     })
   }
   ,
@@ -114,6 +113,7 @@ Page({
       ])
     })
     .then(()=>{
+      wx.hideLoading({})
       newPro.FSRoot = fs.buildFS(newPro.subDocuments);
       wx.showModal({
       title: '提示',
@@ -128,16 +128,15 @@ Page({
         }
       })
     })
-    .catch(()=>{
+    .catch((e)=>{
+      console.error(e)
+      wx.hideLoading({})
       client.getUser().deleteProject(newPro.id);
       wx.showModal({
         title: '提示',
         showCancel: false,
         content: '新建摄影作品失败！'
       })
-    })
-    .finally(() => {
-      wx.hideLoading({})
     })
   },
 
@@ -172,6 +171,7 @@ Page({
       })
       .then(()=>{
           newPro.FSRoot = fs.buildFS(newPro.subDocuments);
+          wx.hideLoading({})
           wx.showModal({
             title: '提示',
             showCancel: false,
@@ -187,15 +187,13 @@ Page({
         })
         .catch(()=>{
           user.deleteProject(newPro.id);
+          wx.hideLoading({})
           wx.showModal({
             title: '提示',
             showCancel: false,
             content: '2新建绘画作品失败！'
           })
         })
-    .finally(() => {
-      wx.hideLoading({})
-    })
   },
 
   newReal: function(){
@@ -231,6 +229,7 @@ Page({
           docs[7].createVersion(ts2),
         ]).then(()=>{
           newPro.FSRoot = fs.buildFS(newPro.subDocuments);
+          wx.hideLoading({})
           wx.showModal({
             title: '提示',
             showCancel: false,
@@ -250,6 +249,7 @@ Page({
             showCancel: false,
             content: '2新建纪实文学作品失败！'
           })
+          wx.hideLoading({})
         })
        
       }).catch(()=>{
@@ -259,6 +259,7 @@ Page({
           showCancel: false,
           content: '新建纪实文学作品失败！'
         })
+        wx.hideLoading({})
       })
     })
     .catch((e) =>{
@@ -267,8 +268,6 @@ Page({
         showCancel: false,
         content: '新建纪实文学作品失败！'
       })
-    })
-    .finally(() => {
       wx.hideLoading({})
     })
   },
@@ -306,6 +305,7 @@ Page({
           docs[5].createVersion(ts1),
           docs[7].createVersion(ts2),
         ]).then(()=>{
+          wx.hideLoading({})
           newPro.FSRoot = fs.buildFS(newPro.subDocuments);
           wx.showModal({
             title: '提示',
@@ -320,6 +320,7 @@ Page({
             }
           })
         }).catch(()=>{
+          wx.hideLoading({})
           user.deleteProject(newPro.id);
           wx.showModal({
             title: '提示',
@@ -328,6 +329,7 @@ Page({
           })
         })
       }).catch(()=>{
+        wx.hideLoading({})
         user.deleteProject(newPro.id);
         wx.showModal({
           title: '提示',
@@ -337,14 +339,12 @@ Page({
       })
     })
     .catch((e) =>{
+      wx.hideLoading({})
       wx.showModal({
         title: '提示',
         showCancel: false,
         content: '新建虚构作品失败！'
       })
-    })
-    .finally(() => {
-      wx.hideLoading({})
     })
   }
 })

@@ -86,19 +86,23 @@ Page({
       content[typ] = self.data.input;
       return newDocument.createVersion(content)//迷茫
       .then(()=>{
-        wx.showToast({title: "新建文件成功！", time: 2000});
-      })
-      .catch((e) =>{
-        wx.showToast({title: "写入文件内容失败!", time: 2000});
-      })
-      .finally(() => {
         wx.navigateBack({//返回
           delta: 1
         });
+        wx.showToast({title: "新建文件成功！", time: 2000});
+      })
+      .catch((e) =>{
+        wx.navigateBack({//返回
+          delta: 1
+        });
+        wx.showToast({title: "写入文件内容失败!", time: 2000});
       })
     })
     .catch((e) =>{
       console.log(e);
+      wx.navigateBack({//返回
+        delta: 1
+      });
       wx.showToast({title: "新建文件失败!", time: 2000})
     })
   }
