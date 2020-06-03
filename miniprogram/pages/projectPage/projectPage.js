@@ -90,7 +90,7 @@ Page({
         const iter = docs => {
             for (const doc of docs) {
                 for (const ver of doc.versions) {
-                    if (!max_ver || ver.timestamp > max_ver.timestamp)
+                    if (!max_ver || ver.timestamp >= max_ver.timestamp)
                         max_ver = ver;
                     if (!min_ver || ver.timestamp < min_ver.timestamp)
                         min_ver = ver;
