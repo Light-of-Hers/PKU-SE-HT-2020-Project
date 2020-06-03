@@ -57,3 +57,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+text {
+  word-break: break-all;
+}

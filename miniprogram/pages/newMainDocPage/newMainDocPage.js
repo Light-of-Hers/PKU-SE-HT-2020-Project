@@ -64,11 +64,19 @@ Page({
   },
   
   newDoc: function(){
+    wx.showLoading({
+      title: '正在创建文档',
+      mask: true
+    })
     const self = this;
     var typ;
     self.data.type? typ = "text":typ = "path";
     self.data.pro.createMainDocument(self.data.docname, typ === "text" ? "text" : "image")
     .then((newDocument)=>{
+      wx.showLoading({
+        title: '正在写入内容',
+        mask: true
+      })
       let content = {};
       content[typ] = self.data.input;
       newDocument.createVersion(content)//迷茫
@@ -78,9 +86,11 @@ Page({
       .catch((e) =>{
         wx.showToast({title: "新建主文件失败!", time: 2000});
       })
-      wx.navigateBack({//返回
-        delta: 1
-      });
+      .finally(() => {
+        wx.navigateBack({//返回
+          delta: 1
+        });
+      })
     })
     .catch((e) =>{
       wx.showToast({title: "新建主文件失败!", time: 2000})

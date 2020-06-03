@@ -70,22 +70,32 @@ Page({
     self.data.type? suffix = ".txt":suffix = ".png";//不确定图片后缀应该写什么
     suffix = ""; // 那就不加吧~
     self.data.docname += suffix
+    wx.showLoading({
+      title: '正在创建文档',
+      mask: true
+    })
     self.data.pro.createSubDocument(self.data.docname, typ === "text" ? "text" : "image", self.data.cwd.getPath()+self.data.docname)
     .then((newDocument)=>{
+      wx.showLoading({
+        title: '正在提交内容',
+        mask: true
+      })
+      self.data.docf = new filesys.DocFile(self.data.docname, newDocument, self.data.cwd);
+      self.data.cwd.addChild(self.data.docf);
       let content = {};
       content[typ] = self.data.input;
-      newDocument.createVersion(content)//迷茫
+      return newDocument.createVersion(content)//迷茫
       .then(()=>{
         wx.showToast({title: "新建文件成功！", time: 2000});
       })
       .catch((e) =>{
-        wx.showToast({title: "新建文件失败!", time: 2000});
+        wx.showToast({title: "写入文件内容失败!", time: 2000});
       })
-      self.data.docf = new filesys.DocFile(self.data.docname, newDocument, self.data.cwd);
-      self.data.cwd.addChild(self.data.docf);
-      wx.navigateBack({//返回
-        delta: 1
-      });
+      .finally(() => {
+        wx.navigateBack({//返回
+          delta: 1
+        });
+      })
     })
     .catch((e) =>{
       console.log(e);

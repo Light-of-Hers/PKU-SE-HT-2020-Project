@@ -92,7 +92,7 @@ Page({
         const self = this;
         wx.showModal({
             title: "提示",
-            content: "是否导出证书？",
+            content: "是否保存到本地？",
             success: res => {
                 if (!res.confirm) return;
                 wx.canvasToTempFilePath({
@@ -102,7 +102,7 @@ Page({
                             filePath: res.tempFilePath,
                             success: () => {
                                 wx.showToast({
-                                    title: '导出成功',
+                                    title: '保存成功',
                                 })
                             }
                         });

@@ -39,10 +39,14 @@ Page({
   },
 
   updateFile: function() {
+    wx.showLoading({
+      title: '正在上传内容',
+      mask: true
+    })
     this.data.doc.createVersion({"text": this.data.input})
     .then(function(res) {
       wx.showToast({
-        title: '已上链存证固化',
+        title: '已上链保存',
         icon: 'success',
         duration: 2000
       })

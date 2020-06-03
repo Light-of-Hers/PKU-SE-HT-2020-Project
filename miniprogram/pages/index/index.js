@@ -15,6 +15,10 @@ Page({
   },
 
   onLoad: function() {
+    wx.showLoading({
+      title: '正在登录',
+      mask: true
+    })
     client.loadLocal()
     .then(() => {
       wx.switchTab({
@@ -23,6 +27,9 @@ Page({
     })
     .catch((e) => {
       console.log(e)
+    })
+    .finally(() => {
+      wx.hideLoading({})
     })
   },
 
@@ -47,6 +54,10 @@ Page({
   },
 
   register: function() {
+    wx.showLoading({
+      title: '正在注册',
+      mask: true
+    })
     client.register(this.data.invitationCode, this.data.name)
     .then(() => {
       wx.showToast({title: "注册成功！"})
@@ -58,9 +69,16 @@ Page({
     .catch((e) => {
       wx.showToast({title: "注册失败：" + e.message, icon: "none"})
     })
+    .finally(() => {
+      wx.hideLoading({})
+    })
   },
 
   login: function() {
+    wx.showLoading({
+      title: '正在登录',
+      mask: true
+    })
     client.login(this.data.credential)
     .then(() => {
       wx.switchTab({
@@ -70,9 +88,16 @@ Page({
     .catch((e) => {
       console.log(e)
     })
+    .finally(() => {
+      wx.hideLoading({})
+    })
   },
 
   cloudLogin: function() {
+    wx.showLoading({
+      title: '正在登录',
+      mask: true
+    })
     client.loadCloud()
     .then(() => {
       wx.switchTab({
@@ -82,6 +107,9 @@ Page({
     .catch((e) => {
       console.log(e)
       wx.showToast({title: "操作失败，请确认此微信号绑定过密钥", icon: "none"})
+    })
+    .finally(() => {
+      wx.hideLoading({})
     })
   }
 })

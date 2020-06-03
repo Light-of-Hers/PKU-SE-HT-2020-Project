@@ -5,6 +5,7 @@ const app = getApp()
 const document = require('../../service/document')
 const client = require('../../service/client')
 const user = require('../../service/user')
+const time = require("../../utils/util")
 
 Page({
   data: {
@@ -90,11 +91,12 @@ Page({
             })
           }
           else{
+            let timestr = time.formatDate(re.time)
             wx.showModal({
               title: '提示',
-              content: '这个证书是真的！签发时间：'+re.time+"持有者公钥："+re.publisher,
+              content: '这个证书是真的！\n签发于：'+timestr+"\n持有者公钥："+re.publisher,
               showCancel: false,
-              confirmText: "我知道了",
+              confirmText: "查看内容",
               success (res) {
                 if (res.confirm) {
                   app.globalData.tmp_arg = {project: re.project};
