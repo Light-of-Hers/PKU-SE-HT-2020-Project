@@ -78,7 +78,7 @@ Page({
     let ts3 = {};ts3["text"] = phos3;
     user.createProject(self.data.proname)
     .then((newPro)=>{
-      Promise.all([
+      return Promise.all([
         newPro.createMainDocument("作品简介", "text"),
         newPro.createMainDocument("作品", "image"),
         newPro.createSubDocument("参数记录", "text", "/参数记录/"),
@@ -89,7 +89,7 @@ Page({
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
-        Promise.all([
+        return Promise.all([
           newPro.mainDocuments[0].createVersion(tm0),
           newPro.mainDocuments[1].createVersion(image),
           newPro.subDocuments[1].createVersion(ts0),
@@ -145,14 +145,14 @@ Page({
     let image = {};image["path"] = artm1;
     user.createProject(self.data.proname)
     .then((newPro)=>{
-      Promise.all([
+      return Promise.all([
         newPro.createMainDocument("作品简介", "text"),
         newPro.createMainDocument("作品", "image"),
         newPro.createSubDocument("灵感碎片", "text", "/灵感碎片/"),
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
-        Promise.all([
+        return Promise.all([
           newPro.mainDocuments[0].createVersion(tm0),
           newPro.mainDocuments[1].createVersion(image),
           newPro.subDocuments[1].createVersion(ts0),
@@ -207,7 +207,7 @@ Page({
     let ts2 = {}; ts2["text"] = reals2;
     user.createProject(self.data.proname)
     .then((newPro)=>{
-      Promise.all([
+      return Promise.all([
         newPro.createMainDocument("第一章节", "text"),
         newPro.createMainDocument("作品简介", "text"),
         newPro.createSubDocument("参考资料", "text", "/参考资料/"),
@@ -218,7 +218,7 @@ Page({
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
-        Promise.all([
+        return Promise.all([
           newPro.mainDocuments[0].createVersion(tm0), 
           newPro.mainDocuments[1].createVersion(tm1),
           newPro.subDocuments[1].createVersion(ts0),
@@ -276,7 +276,7 @@ Page({
     user.createProject(self.data.proname)
     .then((newPro)=>{
       const root = newPro.FSRoot; 
-      Promise.all([
+      return Promise.all([
         newPro.createMainDocument("小说简介", "text"),
         newPro.createMainDocument("第一章", "text"),
         newPro.createSubDocument("大纲", "text", "/大纲/"),
@@ -287,7 +287,7 @@ Page({
         newPro.createSubDocument("灵感碎片帮助手册", "text", "/灵感碎片/灵感碎片帮助手册.txt"),
         newPro.createSubDocument("其他", "text", "/其他/")
       ]).then(()=>{
-        Promise.all([
+        return Promise.all([
           newPro.mainDocuments[0].createVersion(tm0),
           newPro.mainDocuments[1].createVersion(tm1),
           newPro.subDocuments[1].createVersion(ts0),
