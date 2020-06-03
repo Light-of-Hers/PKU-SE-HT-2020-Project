@@ -94,13 +94,17 @@ Page({
               title: '提示',
               content: '这个证书是真的！签发时间：'+re.time+"持有者公钥："+re.publisher,
               showCancel: false,
-              confirmText: "我知道了"
+              confirmText: "我知道了",
+              success (res) {
+                if (res.confirm) {
+                  app.globalData.tmp_arg = {project: re.project};
+                  console.log(project.name);
+                  wx.navigateTo({
+                    url: '../projectPage/projectPage',
+                  })
+                }
+              }
             })
-            app.globalData.tmp_arg = {project: re.project};
-            wx.navigateTo({
-              url: '../projectPage/projectPage',
-            })
-            console.log(project.name);
           }
         }).catch(()=>{
           wx.showToast({title: "验证失败！"})
